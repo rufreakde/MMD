@@ -1,0 +1,11 @@
+Note to know:
+
+use sys.args[x] -> as input not hard coded shit
+
+Libraries nice to know:
+
+urllib
+beautiful soup - getting data from the web scrapng?
+Database api
+pyspark sql module
+
