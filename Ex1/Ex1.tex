@@ -1,0 +1,113 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\usepackage[top=3cm,bottom=3cm,left=2cm,right=2cm]{geometry} % Seitenränder einstellen
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % Umlaute im Text
+\usepackage{inconsolata}
+\usepackage{tgpagella}
+\usepackage{tgadventor}
+\usepackage{minted}
+\usepackage{pythontex}
+\usepackage{hyperref}
+\usepackage[english]{babel} % Worttrennung nach der neuen Rechtschreibung und deutsche Bezeichnungen
+\usepackage[dvipsnames]{xcolor} % Farbe in Dokument
+\parindent 0pt % kein Einrücken bei neuem Absatz
+\usepackage{amsmath} % zusätzliche mathematische Umgebungen
+\usepackage{amssymb} % zusätzliche mathematische Symbole
+\usepackage{bbold} % zusätzliche mathematische Symbole
+\usepackage{units} % schöne Einheiten und Brüche
+\usepackage{icomma} % kein Leerzeichen bei 1,23 in Mathe-Umgebung
+\usepackage{wrapfig} % von Schrift umflossene Bilder und Tabellen
+\usepackage{picinpar} % Objekt in Fließtext platzieren (ähnlich zu wrapfig)
+\usepackage{scrhack} % verbessert andere Pakete, bessere Interaktion mit KOMA-Skript
+\usepackage{float} % bessere Anpassung von Fließobjekten
+\usepackage{pgf} % Makro zur Erstellung von Graphiken
+\usepackage{tikz} % Benutzeroberfläche für pgf
+\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=endash,format=plain]{caption} % Einstellungen für Tabellen und Bildunterschriften
+\usepackage{subcaption} % Unterschriften für mehrere Bilder
+\usepackage{enumitem} % no indentation at description environment
+\usepackage[onehalfspacing]{setspace} % Änderung des Zeilenabstandes (hier: 1,5-fach)
+\usepackage{booktabs} % Einstellungen für schönere Tabellen
+\usepackage{graphicx} % Einfügen von Grafiken -> wird in master-file geladen
+\usepackage{url} % URL's (z.B. in Literatur) schöner formatieren
+\usepackage[pdftex]{hyperref} % Verweise innerhalb und nach außerhalb des PDF; hyperref immer als letztes Paket einbinden
+
+% define bordermatrix with brackets
+
+\makeatletter
+\def\bbordermatrix#1{\begingroup \m@th
+  \@tempdima 4.75\p@
+  \setbox\z@\vbox{%
+    \def\cr{\crcr\noalign{\kern2\p@\global\let\cr\endline}}%
+    \ialign{$##$\hfil\kern2\p@\kern\@tempdima&\thinspace\hfil$##$\hfil
+      &&\quad\hfil$##$\hfil\crcr
+      \omit\strut\hfil\crcr\noalign{\kern-\baselineskip}%
+      #1\crcr\omit\strut\cr}}%
+  \setbox\tw@\vbox{\unvcopy\z@\global\setbox\@ne\lastbox}%
+  \setbox\tw@\hbox{\unhbox\@ne\unskip\global\setbox\@ne\lastbox}%
+  \setbox\tw@\hbox{$\kern\wd\@ne\kern-\@tempdima\left[\kern-\wd\@ne
+    \global\setbox\@ne\vbox{\box\@ne\kern2\p@}%
+    \vcenter{\kern-\ht\@ne\unvbox\z@\kern-\baselineskip}\,\right]$}%
+  \null\;\vbox{\kern\ht\@ne\box\tw@}\endgroup}
+\makeatother
+
+% make Titel
+\title{Mining massive Datasets WS 2017/18}
+\subtitle{Problem Set 1}
+\author{Rudolph, Marvin, Daniela Schacherer}
+
+\begin{document}
+	\maketitle
+	
+	\begin{minted}{latex}
+		\begin{pycode}
+			lo, hi = 1, 6
+			print(r"\begin{tabular}{c|c}")
+				print(r"$m$ & $2^m$ \\ \hline")
+				for m in range(lo, hi + 1):
+				print(r"%d & %d \\" % (m, 2**m))
+				print(r"\end{tabular}")
+		\end{pycode}
+	\end{minted}
+	
+	
+	\begin{pycode}
+		lo, hi = 1, 6
+		print(r"\begin{tabular}{c|c}")
+			print(r"$m$ & $2^m$ \\ \hline")
+			for m in range(lo, hi + 1):
+			print(r"%d & %d \\" % (m, 2**m))
+			print(r"\end{tabular}")
+	\end{pycode}
+	
+
+	\section*{Exercise 01}
+	Given is a cluster of $n$ machines, each having a probability $p$ of failing. 
+	\begin{itemize}
+		\item[a)] The probability of one machine to not fail is $1-p$. \\
+		The probability of ALL machines not failing is $n$ times $1-p$ which is $(1-p)^n$. \\
+		The probability of at least one machine failing is the opposite event and thus $1 - (1-p)^n$.
+		\item[b)] The probability $p_k$ of exactly $k$ machines failing can be described using the binomial distribution. The binomial distribution describes the discrete probabilities of the number of successes in a sequence of independent experiments. As we have independent machines in the cluster with the number of successes corresponding to a machine failing we can write: \\
+		\begin{align*}
+			p(k|p,n) = {n\choose k} p^k (1-p)^{n-k}
+		\end{align*}
+		$p^k$ is the probablity that $k$ machines fail which has to be multiplied to the probability that the other $n-k$ machines do not fail. The binomial coefficient is the combinatoric element and describes in which way $k$ elements can be chosen from $n$ elements. 
+		\item[c)] 
+		Zz.: $p_1 + p_2 + ... + p_n = 1 - (1-p)^n$ \\
+		We have $p_1 = p_2 = ... = p_n = p = {n \choose k} p^k (1-p)^{n-k}$
+		\begin{align*}
+			p_1 + p_2 + ... + p_n &= \sum_{k=1}^n {n \choose k} p^k (1-p)^{n-k} \\
+			\intertext{We can use the binomial theorem: $\sum_{k=0}^n {n\choose k} y^k x^{n-k} = (x+y)^n$ but have to subtract $p_0$ again}
+			&=  \sum_{k=0}^n {n \choose k} p^k (1-p)^{n-k} - {n \choose 0} p^0 (1-p)^n \\
+			&= ((1-p) + p)^n - (1-p)^n	\\		
+			&= 1^n - (1-p)^ n \\
+			&= 1-(1-p)^n			
+		\end{algin*}
+	\end{itemize}
+	
+
+
+
+
+
+\end{document}
+
