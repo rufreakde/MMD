@@ -1,0 +1,32 @@
+=>PYTHONTEX#py#default#default#0#code#####73#
+		lo, hi = 1, 6
+		print(r"\begin{tabular}{c|c}")
+			print(r"$m$ & $2^m$ \\ \hline")
+			for m in range(lo, hi + 1):
+			print(r"%d & %d \\" % (m, 2**m))
+			print(r"\end{tabular}")
+=>PYTHONTEX:SETTINGS#
+version=0.14
+outputdir=pythontex-files-Ex1
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python|
+pygfamily=pylabcon|pycon|
