@@ -6,7 +6,6 @@
 \usepackage{tgpagella}
 \usepackage{tgadventor}
 \usepackage{minted}
-\usepackage{pythontex}
 \usepackage{hyperref}
 \usepackage[english]{babel} % Worttrennung nach der neuen Rechtschreibung und deutsche Bezeichnungen
 \usepackage[dvipsnames]{xcolor} % Farbe in Dokument
@@ -53,33 +52,9 @@
 % make Titel
 \title{Mining massive Datasets WS 2017/18}
 \subtitle{Problem Set 1}
-\author{Rudolph, Marvin, Daniela Schacherer}
+\author{Rudolf Chrispens, Marvin, Daniela Schacherer}
 
 \begin{document}
-	\maketitle
-	
-	\begin{minted}{latex}
-		\begin{pycode}
-			lo, hi = 1, 6
-			print(r"\begin{tabular}{c|c}")
-				print(r"$m$ & $2^m$ \\ \hline")
-				for m in range(lo, hi + 1):
-				print(r"%d & %d \\" % (m, 2**m))
-				print(r"\end{tabular}")
-		\end{pycode}
-	\end{minted}
-	
-	
-	\begin{pycode}
-		lo, hi = 1, 6
-		print(r"\begin{tabular}{c|c}")
-			print(r"$m$ & $2^m$ \\ \hline")
-			for m in range(lo, hi + 1):
-			print(r"%d & %d \\" % (m, 2**m))
-			print(r"\end{tabular}")
-	\end{pycode}
-	
-
 	\section*{Exercise 01}
 	Given is a cluster of $n$ machines, each having a probability $p$ of failing. 
 	\begin{itemize}
@@ -104,8 +79,151 @@
 		\end{algin*}
 	\end{itemize}
 	
-
-
+\section*{Exercise 02}
+\begin{itemize}
+	\item[a1)]
+		# join() - TRANSFORMATION	
+		Input:
+		otherDataset, [numTasks]
+		
+		Output:
+		Returns a dataset with "Key/(V1,V2)" pairs.
+		
+		Code Example:
+    		rdd1 = sc.parallelize([("foo", 1), ("bar", 2), ("baz", 3)])
+    		rdd2 = sc.parallelize([("foo", 4), ("bar", 5), ("bar", 6)])
+    		rdd1.join(rdd2)
+	\item[a2)]
+    		# sort() - TRANSFORMATION - Could not find sort() in reference used sortByKey() instead
+    		# https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#rdd-operations
+    		Input:
+		[ascending], [numTasks
+		
+		Output:
+		When called on a dataset of (K, V) pairs where K implements Ordered, returns a dataset of (K, V) pairs sorted by keys in ascending or 			descending order, as specified in the boolean ascending argument.
+		
+		Code Example:
+    		names = sc.textFile(sys.argv[1])
+    		filtered_rows = names.filter(lambda line: "Count" not in line).map(lambda line: line.split(","))
+    		filtered_rows.map(lambda n: (str(n[1]), int(n[4]))).sortByKey().collect()
+	\item[a2)]
+    		# groupby() - TRANSFORMATION - Could not find groupby() in reference used groupByKey() instead
+    		# https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#rdd-operations
+    		Input:
+		[ascending], [numTasks]
+		
+		Output:
+		Returns a dataset with "Key/Value" Pairs sorted ascending or descending.
+		
+		Code Example:
+		# groupby() TRANSFORMATION
+    		lines = spark.read.text(sys.argv[1]).rdd.map(lambda r: r[0])
+    		words = lines.flatMap(lambda x: x.split(' '))
+    		words.reduceByKey(lambda x, y: x + y, 5)
+    		words.groupByKey(5)
+    
+	\item[b1.1)]
+		# NOTE
+		All the tested source code is in U1_Ex2.py
+	
+		# INTERSECTION
+		Input:
+		[RDD]
+		
+		Output:
+		Returns a RDD with the intersecting elements of two datasets.
+		
+		Code example:
+		intersectRDD1 = sc.parallelize(range(1, 10))
+    		intersectRDD2 = sc.parallelize(range(5, 15))
+    		intersect = intersectRDD1.intersection(intersectRDD2).collect()
+    		print(intersect)
+		
+		exampleOutput:
+		[8, 9, 5, 6, 7]
+		
+	\item[b1.2)]
+		# DISTINCT
+		Input:
+		[numTasks]
+		
+		Output:
+		Return a new dataset that contains the distinct elements of the source dataset.
+		
+		example Code:
+		distinctRDD1 = sc.parallelize(range(1, 12))
+    		distinctRDD2 = sc.parallelize(range(8, 20))
+    		distinct = distinctRDD1.union(distinctRDD2).distinct().collect()
+    		print(distinct)
+		
+		exampleOutput:
+		[8, 16, 1, 9, 17, 2, 10, 18, 3, 11, 19, 4, 12, 5, 13, 6, 14, 7, 15]
+		
+	\item[b1.3)]
+		# UNION
+		Input:
+		[RDD]
+		
+		Output:
+		Return a new dataset that contains the union of the elements in the source dataset and the argument.
+		
+		example Code:
+		unionRDD1 = sc.parallelize(range(1, 7))
+    		unionRDD2 = sc.parallelize(range(3, 10))
+    		union = unionRDD1.union(unionRDD2).collect()
+    		print(union)
+		
+		exampleOutput:
+		[1, 2, 3, 4, 5, 6, 3, 4, 5, 6, 7, 8, 9]
+		
+	\item[b2.1)]
+		# COLLECT
+		Input:
+		NONE is called as a function on an RDD
+		
+		Output:
+		Return all the elements of the dataset as an array at the driver program.
+		
+		example Code:
+		collection = sc.parallelize([1, 2, 3, 4, 5]).flatMap(lambda x: [x, x, x]).collect()
+    		print(collection)
+		
+		exampleOutput:
+		[1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]
+		
+	\item[b2.2)]
+		# COUNT
+		Input:
+		NONE is called as a function on an RDD
+		
+		Output:
+		Return all the number of elements of the dataset as an array at the driver program.
+		
+		example Code:
+		names1RDD = sc.parallelize(["Daniela", "Marvin", "Rudolf", "Kevin", "Jaqueline"])
+    		counts = names1RDD.count()
+    		print(counts)
+		
+		exampleOutput:
+		5
+		
+	\item[b2.3)]
+		# FIRST
+		Input:
+		NONE is called as a function on an RDD
+		
+		Output:
+		Return all the first element of the dataset as an array at the driver program.
+		
+		example Code:
+		names2RDD = sc.parallelize(["Daniela", "Marvin", "Rudolf"])
+   	 	first = names2RDD.first()
+    		print(first)
+		
+		exampleOutput:
+		Daniela
+		
+	\end{itemize}
 
 
 
