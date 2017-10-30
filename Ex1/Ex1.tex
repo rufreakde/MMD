@@ -6,7 +6,7 @@
 \parindent 0pt % kein Einrücken bei neuem Absatz
 \usepackage{amsmath} % zusätzliche mathematische Umgebungen
 \usepackage{amssymb} % zusätzliche mathematische Symbole
-\usepackage{bbold} % zusätzliche mathematische Symbole
+%\usepackage{bbold} % zusätzliche mathematische Symbole
 \usepackage{units} % schöne Einheiten und Brüche
 \usepackage{icomma} % kein Leerzeichen bei 1,23 in Mathe-Umgebung
 \usepackage{wrapfig} % von Schrift umflossene Bilder und Tabellen
@@ -222,7 +222,19 @@
 \section*{Exercise 03}
 	\begin{itemize}
 		\item [a)] see comments in 01-03_kmeans.py
-		\item[b)] see 01-03_kmeans.py
+		\item [b)] see 01-03_kmeans.py
+	\end{itemize}
+
+\section*{Exercise 04}
+	\begin{itemize}
+		\item [a)] Broadcast provides a fast way to send data to each desired \textit{node} once. In this context the \textit{node} is one dataset of the data we want to map.\\ 
+Broadcast is a better solution than to just \textit{join} the data. Once its send to a machine with Broadcast it stays cached on this machine and you can access the Broadcast values on the \textit{nodes}. But be careful, don't modify the Broadcast data.\\
+A \textit{task} is the function we want to execute in the map step.
+		\item [b)] Accumulators are used to count something up. For example (in the video) we need this to count failures in the application.\\
+If we want to build a custom accumulator we have to implement the type of the accumulator. For example a Vector class to build an accumulator of type Vector.\\
+The accumulator can only be used in the Master (Exception on workers), the reduce() function gathers data from all tasks.
+		\item [c)] The \textit{join()}, \textit{mapValues()} and \textit{reduceByKey()} all results in partitioned RDD’s. With partitioning there is less traffic over networks what makes it much faster.\\
+In the pageRank example the links have a partitioner so that links with the same hash are on the same node. To build a custom one you have to implement a class that extends from Partitioner. The class need the variable \textit{numPartitions} and the functions \textit{getPartition()} and \textit{equals()}.
 	\end{itemize}
 
 \section*{Exercise 05}
