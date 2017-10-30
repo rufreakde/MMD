@@ -49,6 +49,9 @@
 \author{Rudolf Chrispens, Marvin, Daniela Schacherer}
 
 \begin{document}
+
+\maketitle
+
 	\section*{Exercise 01}
 	Given is a cluster of $n$ machines, each having a probability $p$ of failing. 
 	\begin{itemize}
@@ -218,7 +221,21 @@
 		
 	\end{itemize}
 
+\section*{Exercise 03}
+	\begin{itemize}
+		\item [a)] see comments in 01-03_kmeans.py
+		\item[b)] see 01-03_kmeans.py
+	\end{itemize}
 
+\section*{Exercise 05}
+	\begin{itemize}
+		\item Version 1: [:] is missing in line 130 \\
+    In line 130 the variable centroids and newCentroids would refer to the same instance. In the for-loop newCentroids is changed and a new instance with the same values is created with centroids = newCentroids[:] in line 157.
+		\item Version 2: [:] is missing in line 157 \\
+    In line 130 centroids and newCentroids will refer to different instances. In the for-loop newCentroids is changed and the variable centroids is in line 157 assigned to newCentroids, meaning they then refer to the same object. In every further for-loop newCentroids will be changed and then assigned to centroids although they are already the same instance.
+		\item Version 3: [:] is missing in line 130 and line 157 \\
+    In line 130 the variable centroids and newCentroids would refer to the same instance. In the for-loop newCentroids is changed which changes also centroids as they refer to the same object. The same is true for every further for-loop. One of the two variables is therefore needless.
+	\end{itemize}
 
 \end{document}
 
