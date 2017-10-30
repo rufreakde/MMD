@@ -1,12 +1,6 @@
 \documentclass[11pt,a4paper]{scrartcl}
 \usepackage[top=3cm,bottom=3cm,left=2cm,right=2cm]{geometry} % Seitenränder einstellen
-\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % Umlaute im Text
-\usepackage{inconsolata}
-\usepackage{tgpagella}
-\usepackage{tgadventor}
-\usepackage{minted}
-\usepackage{hyperref}
 \usepackage[english]{babel} % Worttrennung nach der neuen Rechtschreibung und deutsche Bezeichnungen
 \usepackage[dvipsnames]{xcolor} % Farbe in Dokument
 \parindent 0pt % kein Einrücken bei neuem Absatz
@@ -76,13 +70,13 @@
 			&= ((1-p) + p)^n - (1-p)^n	\\		
 			&= 1^n - (1-p)^ n \\
 			&= 1-(1-p)^n			
-		\end{algin*}
+		\end{align*}
 	\end{itemize}
 	
 \section*{Exercise 02}
 \begin{itemize}
 	\item[a1)]
-		# join() - TRANSFORMATION	
+		-join() - TRANSFORMATION	
 		Input:
 		otherDataset, [numTasks]
 		
@@ -94,8 +88,8 @@
     		rdd2 = sc.parallelize([("foo", 4), ("bar", 5), ("bar", 6)])
     		rdd1.join(rdd2)
 	\item[a2)]
-    		# sort() - TRANSFORMATION - Could not find sort() in reference used sortByKey() instead
-    		# https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#rdd-operations
+    		-sort() - TRANSFORMATION - Could not find sort() in reference used sortByKey() instead
+    		-https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#rdd-operations
     		Input:
 		[ascending], [numTasks
 		
@@ -107,8 +101,8 @@
     		filtered_rows = names.filter(lambda line: "Count" not in line).map(lambda line: line.split(","))
     		filtered_rows.map(lambda n: (str(n[1]), int(n[4]))).sortByKey().collect()
 	\item[a2)]
-    		# groupby() - TRANSFORMATION - Could not find groupby() in reference used groupByKey() instead
-    		# https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#rdd-operations
+    		-groupby() - TRANSFORMATION - Could not find groupby() in reference used groupByKey() instead
+    		-https://spark.apache.org/docs/2.2.0/rdd-programming-guide.html#rdd-operations
     		Input:
 		[ascending], [numTasks]
 		
@@ -116,17 +110,16 @@
 		Returns a dataset with "Key/Value" Pairs sorted ascending or descending.
 		
 		Code Example:
-		# groupby() TRANSFORMATION
     		lines = spark.read.text(sys.argv[1]).rdd.map(lambda r: r[0])
     		words = lines.flatMap(lambda x: x.split(' '))
     		words.reduceByKey(lambda x, y: x + y, 5)
     		words.groupByKey(5)
     
 	\item[b1.1)]
-		# NOTE
+		-NOTE
 		All the tested source code is in U1_Ex2.py
 	
-		# INTERSECTION
+		-INTERSECTION
 		Input:
 		[RDD]
 		
@@ -143,7 +136,7 @@
 		[8, 9, 5, 6, 7]
 		
 	\item[b1.2)]
-		# DISTINCT
+		-DISTINCT
 		Input:
 		[numTasks]
 		
@@ -160,7 +153,7 @@
 		[8, 16, 1, 9, 17, 2, 10, 18, 3, 11, 19, 4, 12, 5, 13, 6, 14, 7, 15]
 		
 	\item[b1.3)]
-		# UNION
+		-UNION
 		Input:
 		[RDD]
 		
@@ -177,7 +170,7 @@
 		[1, 2, 3, 4, 5, 6, 3, 4, 5, 6, 7, 8, 9]
 		
 	\item[b2.1)]
-		# COLLECT
+		-COLLECT
 		Input:
 		NONE is called as a function on an RDD
 		
@@ -192,7 +185,7 @@
 		[1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5]
 		
 	\item[b2.2)]
-		# COUNT
+		-COUNT
 		Input:
 		NONE is called as a function on an RDD
 		
@@ -208,7 +201,7 @@
 		5
 		
 	\item[b2.3)]
-		# FIRST
+		-FIRST
 		Input:
 		NONE is called as a function on an RDD
 		
