@@ -73,7 +73,33 @@ Pseudocode for step 3 and 4 of subroutine \textit{merge} from lecture 3:
 		
 	\end{itemize}
 
+\section*{Exercise 04 - Pseudocode}
+\paragraph{Step 1:}
+Take a small sample of the data and cluster it in main memory.\\
+In principle, any clustering method could be used, but as CURE is designed to handle oddly shaped clusters, it is often advisable to use a hierarchical method in which clusters are merged when they have a close pair of points.
+\begin{tabbing}
+Links \= Mitte \= Rechts \kill\>	\#Take a Sample of the whole Dataset\\\>	\#use hierarchical clustering algorithm to cluster the sampleData\\\> \>	 sampleSize;\\\> \> 	sampleData = textFile.takeSample(false, sampleSize);\\\> \>	hierarchicalCluster = HclusterAlgorythm( sampleData );
+\end{tabbing}
+\paragraph{Step 2:}Select a small set of points from each cluster to be representative points. \\
+These points should be chosen to be as far from one another as possible, \\
+using the method described in Section 7.3.2.
+\begin{tabbing}
+Links \= Mitte \= Rechts  \=Rechts2 \kill\#Select small set of points of each cluster. \\\#They should be as far as possible from each other\\FOR EACH hCluster in hierarchicalCluster DO\\\>\#Pick the first point at random\\\>\>	repPoints.add( hCluster.takeSample(false, 1) );\\\>WHILE repPoints.count() $<$ hierarchicalCluster.count() DO\\\>\#Add the point whose minimum distance from the selected points is as largest; \\\>furthestPoint;\\\>FOR EACH point in hCluster DO\\\> \>		If( furthestPoint.squared\_distance( repPoints ) $<$ 			Point.squared\_distance( repPoints ) ) DO\\\> \>	\>		furthestPoint = point;\\\>repPoints.add( furthestPoint);\\END;
+\end{tabbing}
+\paragraph{Step 3:}Move each of the representative points a fixed fraction of the distance between its location and the centroid of its cluster. Perhaps 20\% is a good fraction to choose. Note that this step requires a Euclidean space, since otherwise, there might not be any notion of a line between two points.
 
+\begin{tabbing}
+Links \= Mitte \= Rechts \kill\> FOR EACH repPoint in repPoints DO\\\> \> 	Center = clusterCenters(repPoints);\\\> \> 	repPoint.moveTo(Center,0.2);
+\end{tabbing}
+
+\paragraph{Step 4:}The next phase of CURE is to merge two clusters if they have a pair of representative points, one from each cluster, that are sufficiently close. The user may pick the distance that defines ?close.? This merging step can repeat, until there are no more sufficiently close clusters.
+\begin{tabbing}
+Links \= Mitte \= Rechts  \=Rechts2 \kill\> 	Threshold;\\\> 	FOR EACH cluster in repPoints DO\\\> \> 		IF (closestClusterFound = closest\_cluster(repPoints, cluster, Threshold):\\\> \> 	\>		mergeCluster(closestClusterFound, cluster):
+\end{tabbing}
+\paragraph{Step 5:}The last step of CURE is point assignment. Each point p is brought from secondary storage and compared with the representative points. We assign p to the cluster of the representative point that is closest to p.
+\begin{tabbing}
+Links \= Mitte \= Rechts  \=Rechts2 \kill\> FOR EACH point in Dataset DO\\\> \>	nearestCluster(point, repPoints).add(point);
+\end{tabbing}
 
 \end{document}
 
