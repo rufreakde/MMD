@@ -53,8 +53,43 @@
 
 \maketitle
 
-\section*{Exercise 02}
+\section*{Exercise 01}
+\begin{itemize}
+\item[1.] More information in Ex1.py.
+	Implemented the peusdocode into a working .py algorithm.
+	Could not increase the performance of the for loop. Couldn't understand how this would be done?
+\item[2.] 
+	Solution for problemset "dataset-problemset3-ex1-2" can be found in 1\_2\_ProblemsetSolution.pdf the code
+	used code was in Ex1.py. 
+	\begin{lstlisting}
+		numpyDataset = np.load("dataset-problemset3-ex1-2.npy")
+		print(numpyDataset)
+	\end{lstlisting}
+\item[3.] Code is in  Ex1\_3.py. Time is recorded in seconds.
+\begin{verbatim}	
+	Time: 	1.5244791507720947	N: 1
+	Time: 	1.0207879543304443	N: 2
+	Time: 	1.9531109333038330	N: 3
+	Time: 	3.8049488067626953	N: 4
+	Time: 	5.6916959285736080	N: 5
+	Time: 	9.2186932563781740	N: 6
+	Time: 	14.890535116195679	N: 7
+	Time: 	22.376883983612060	N: 8
+	Time: 	29.547118186950684	N: 9
+	Time: 	44.000823020935060	N: 10
+	Time: 	66.097368001937870	N: 11
+	Time: 	73.463916063308720	N: 12
+	Time: 	95.624380350112920	N: 13
+	Time: 	122.46513080596924	N: 14
+	Time: 	153.88598299026490	N: 15
+	Time: 	191.58319568634033	N: 16
+	Time: 	235.73992490768433	N: 17
+	Time: 	286.40261006355286	N: 18
+	Time: 	347.29994392395020	N: 19
+\end{verbatim}
+\end{itemize}
 
+\section*{Exercise 02}
 	\begin{itemize}
 		\item[1.] MapReduce Pseudocode for k-means\\
 		The k-means algorithm consists of two steps. The first step computes for each mean $\mu_i$ the set of points that are closest to it. In the second step new means are computed using the priorily determined sets. These two phases correspond to the Map- and the Reduce phase of MapReduce. \\
