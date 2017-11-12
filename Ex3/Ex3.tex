@@ -87,5 +87,39 @@ Pseudocode:
 
 	\end{itemize}
 	
+	
+\section*{Exercise 03}
+
+\subsection*{a)}
+
+In Spark the input of every Transformation (map) and Action (reduce) is a RDD. With a Transformation the output is again a RDD and with an action the output can have different types. The data in the RDD can be different, key-value pairs is not mandatory.\\
+In MapReduce the output is not a RDD but a set of key-value pairs. The output is again a set of key-value pairs. Depending on the map step the output has a different number of data. At the reduce step it is basically the same. Input and output are both key-value pairs. 
+
+\subsection*{b)}
+
+I wrote a spark application that counts the number of characters in a textfile. The Code is in the submitted \textit{ex3problem3b.py} file that uses the textfile \textit{lorem\_ipsum.txt}.\\\\
+Program code:
+\lstset{breaklines=true}
+\begin{lstlisting}
+from pyspark import SparkContext
+
+if __name__ == "__main__":
+    sc = SparkContext(appName="PythonKMeans")
+
+    lines = sc.textFile("lorem_ipsum.txt")
+    lineLengths = lines.map(lambda s: len(s))
+    totalLength = lineLengths.reduce(lambda a, b: a + b)
+
+    print(totalLength)
+
+    sc.stop()
+\end{lstlisting}
+
+The output of the Program
+
+\begin{lstlisting}
+591
+\end{lstlisting}
+
 \end{document}
 
