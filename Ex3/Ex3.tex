@@ -46,7 +46,7 @@
 
 % make Titel
 \title{Mining massive Datasets WS 2017/18}
-\subtitle{Problem Set 2}
+\subtitle{Problem Set 3}
 \author{Rudolf Chrispens, Marvin, Daniela Schacherer}
 
 \begin{document}
@@ -58,7 +58,7 @@
 	\begin{itemize}
 		\item[1.] MapReduce Pseudocode for k-means\\
 		The k-means algorithm consists of two steps. The first step computes for each mean $\mu_i$ the set of points that are closest to it. In the second step new means are computed using the priorily determined sets. These two phases correspond to the Map- and the Reduce phase of MapReduce. \\
-The Map phase computes the squared distance to all means for each point $x$ in the dataset and returns a key-value pair $(i, (x,1))$ where $i$ is the index of the mean. The Reduce phase then simply computes the sum of the vector points for each key. \\
+The Map phase computes the squared distance to all means for each point $x$ in the dataset and returns a key-value pair $(i, (x,1))$ where $i$ is the index of the mean with the smallest distance to point $x$. The Reduce phase then simply computes the sum of the vector points for each key. \\
 Pseudocode:
 \begin{itemize}
 	\item \textbf{Map} for every point x: return $(argmin_i(|| x- \mu_i ||, (x,1))$
@@ -66,14 +66,17 @@ Pseudocode:
 \end{itemize}
 
 		\item[2.] MapReduce Pseudocode for Inverted Indexing\\
+		Inverted 
 		\begin{itemize}
 			\item \textbf{Map}: for every keyword in the given list the Mapper should perform the following: \\
 		if $keyword$ in $text_i$: return $(keyword, doc_i)$
 			\item \textbf{Reduce}: for every keyword add the documents indices to a list and finally return $(keyword, [doc_i, doc_j, ..])$
 		\end{itemize}
+		The proposed pseudocode would probably not scale well with the number of keywords, because the mapper has to run a search algorithm for every keyword. If the number of mappers is limited, a mapper has to perform multiple searches and thus the time for the complete calculation will get larger. 
+
 
 		\item[3.] MapReduce Pseudocode \\
-		When one dataset is small and every mapper has access to it the joining can already be part of the mapping phase. Let $R$ with tuples $(a,b)$ and $S$ with tuples $b,c)$ be the datasets, and $R$ is the smaller one. We want to join on $b$. Every mapper gets tuples from $S$ in this form: $(S,a,b)$
+		When one dataset is small and every mapper has access to it the joining can already be part of the mapping phase. Let $R$ with tuples $(a,b)$ and $S$ with tuples $(b,c)$ be the datasets, and $R$ is the smaller one. We want to join on $b$. Every mapper gets tuples from $S$ in this form: $(S,a,b)$
 		\begin{itemize}
 			\item \textbf{Map}: for every tuple of R: \\
 			if $b$ in $(S,a,b)$: return $(a,b,c)$
