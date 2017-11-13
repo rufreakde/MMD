@@ -156,6 +156,22 @@ The output of the Program
 591
 \end{lstlisting}
 
+\subsection*{c)}
+
+Here is the Spark reduce function I try to show in MapReduce:
+
+\begin{lstlisting}
+exampleRdd.reduce(lambda a, b: a**2 + b**2)
+\end{lstlisting}
+
+In MapReduce it would be something like that (I guess):
+
+\begin{lstlisting}
+numbers.map(x => x * x)
+numbers.reduce(_ + _)
+\end{lstlisting}
+
+
 \section*{Exercise 04}
 
 \subsection*{a)}
