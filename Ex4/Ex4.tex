@@ -177,4 +177,21 @@ $
 		\item $sim(B,C) = -0.41 $
 	\end{itemize}
 	\end{itemize}
+
+\section*{Exercise 04}
+
+Alternatives for numerical ratings are symbols that show how good the connection is or maybe strings. The problem with strings is that someone has to determine its value, no matter if it is a KI or a human.
+
+\subsection*{(a)}
+
+In this case the users are the students and the professors constitute as items. The rating is put together out of the different experience. For example: a student gives a rating in every category and the connection (rating) is the mean (maybe some categorys are weighted more than others) out of all ratings. These values are used to build the matrix.
+
+\subsection*{(b)}
+
+The users in this context are obviously the users of the online community. Since every user can upload more than one picture, users have to rate the pictures and not other users. That's why the items are the pictures of artworks and not users. I think the best rating for this problem is a star rating. Therefore the matrix will consist of calues from 1 to 5.
+
+\subsection*{(c)}
+
+Both the users and items are the users that use this dating platform. The special thing about this scenario is, that we have to pay attention on values for blocked users and that we have to check the "dream partner" of an user. Send messages don't need to be observed because it means nothing if one user send a message. Maybe he is bored or maybe it's a bot, so it's safer to ignore the messages. So if we want to suggest one user to another the value should be negative if this user is blocked and shuold be very high if the user is close to the "dream partner". Liked users just have a constant value.
+
 \end{document}
