@@ -98,7 +98,7 @@ With possible rounding errors during the calculation we receive for the angles:
 
 	\end{itemize}
 	
-\section*{Exercise 01}	
+\section*{Exercise 02}	
 
 	Consider a web shop that sells furniture and uses a recommendation system. 
 	When a new user creates an account and likes one product, he will be presented with similar products on his next visit.
@@ -127,5 +127,51 @@ With possible rounding errors during the calculation we receive for the angles:
 		\item -
 	\end{enumerate}
 \end{itemize}
-\end{document}
 
+
+\section*{Exercise 03}
+\begin{itemize}
+	\item[a)] The Jaccard distance between two sets $C_1$ and $C_2$ is defined as $d(C_1, C_2) = 1 - \frac{|C_1 \cap C_2| }{|C_1 \cup C_2|}$. \\
+	For instance regarding user A and B we need to sum up the elements which have been rated by at least one of the two users (which are all given elements and thus 8) and in a second step count the elements which have been rated by both, user A and B (which is the case for element b, d, e, g and thus 4 elements). We receive: $d(C_A, C_B) = 1 - \frac{4}{8} = 0.5$. We perform this calculation for all pairs of users and get:
+	\begin{itemize}
+		\item $d(C_A, C_B) = 1 - \frac{4}{8} = 0.5$
+		\item $d(C_A, C_C) = 1 - \frac{4}{8} = 0.5$
+		\item $d(C_B, C_C) = 1 - \frac{4}{8} = 0.5$
+	\end{itemize}
+
+	\item[b)] The cosine distance is defined as: $sim(A,B) = cos(A,B) = \frac{A*B}{||A|| * ||B||}$. For every missing rating of a user a zero is inserted, thus the vector for user A would be $A = (4,5,0,5,1,0,3,2)$. We get the following results:
+	\begin{itemize}
+		\item $sim(A,B) = 0.601$
+		\item $sim(A,C) = 0.615$
+		\item $sim(B,C) = 0.514$
+	\end{itemize}
+
+	\item[c)] If we treat 3,4 and 5 as 1 (interpretation True) and 1,2, and blank as 0 (interpretation False) we receive the following values for the Jaccard distance:
+	\begin{itemize}
+		\item $d(C_A, C_B) = 1 - \frac{2}{5} = 0.4$
+		\item $d(C_A, C_C) = 1 - \frac{2}{6} = 0.3$
+		\item $d(C_B, C_C) = 1 - \frac{1}{6} = 0.17$
+	\end{itemize}
+	\item[d)] If we do the same as in c) we receive for the cosine distances:
+	\begin{itemize}
+		\item $sim(A,B) = \frac{2}{2*\sqrt{2}} = 0.707$
+		\item $sim(A,C) = \frac{2}{2*2} = 0.5$
+		\item $sim(B,C) = \frac{1}{\sqrt{2}*2} = 0.354 $
+	\end{itemize}
+	
+	\item[e)] The average user vales are: $avg_A = 2.5, avg_B = 1.75, avg_C = 2.25$. Normalizing the matrix with those averages one receives: \\
+$\bordermatrix{
+  & a	& b   & c & d & e & f & g & h  \cr
+A & 1.5 & 2.5 & - & 2.5 & -1.5 & - & 0.5 & -0.5 \cr
+B & - & 1.25 & 2.25 & 1.25 & -0.75 & 0.25 & -0.75 & - \cr
+C & -0.25 & - & -1.25 & 0.75 & - & 1.75 & 2.75 & 0.75 \cr
+}
+$ 
+	\item[f)] With the matrix calculated in part e) we finally end up with the following cosine distances:
+	\begin{itemize}
+		\item $sim(A,B) = 0.689 $
+		\item $sim(A,C) = 0.223$
+		\item $sim(B,C) = -0.41 $
+	\end{itemize}
+	\end{itemize}
+\end{document}
