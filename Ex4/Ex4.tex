@@ -105,27 +105,30 @@ With possible rounding errors during the calculation we receive for the angles:
 
 \begin{itemize}
 \item[]How can a competitor - in principle - try to steal the valuable data for recommendation from this website?
-	\begin{enumerate}
-		\item -
-	\end{enumerate}
+	\begin{description}
+		\item -Write a Bot that likes an Item (or a random set of items) and looks into the recommended list. 
+		\item -Repeat this process numerous times for every item. 
+		\item -Using this data gathered, the competitor can recreate his own recommendation data out of the suggestions of the web shop.
+	\end{description}
 
 \item[]Does this work better when the web shop implemented a content- based or a collaborative filtering system?
-	\begin{enumerate}
-		\item -
-	\end{enumerate}
+	\begin{description}
+		\item -It works better in a content- based filtering system, because it uses only the user data of one user.
+	\end{description}
 
 \item[]What data would the competitor be able to infer?
-	\begin{enumerate}
-		\item -
-	\end{enumerate}
+	\begin{description}
+		\item -The competitor could infer what kind of items would be recommended for specific users, because of the gathered data.
+		\item -He can create sets of recommendations for all combinations of the current set of data from the web shop.
+	\end{description}
 \item[]Would this technique have an impact on the recommendation system, i.e., would this attack create a bias on the data?
-	\begin{enumerate}
-		\item -
-	\end{enumerate}
+	\begin{description}
+		\item -If the bot data of the web shop is treated as a user (not filtered out) then it will bias the data with random not useful data. For example: Like on a Deathpunk band and also Like on Justin Bieber, which would not be "normal" user data.
+	\end{description}
 \item[]Why is this attack probably not viable in any case?
-	\begin{enumerate}
-		\item -
-	\end{enumerate}
+	\begin{description}
+		\item -Because of the huge real user Dataset and the modern Algorithms for filtering those kind of attacks would not be relevant, they get filtered out.
+	\end{description}
 \end{itemize}
 
 
