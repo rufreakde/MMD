@@ -37,21 +37,21 @@ def PearsonCorrelationCoefficient( df, user1, user2):
 
 spark = SparkSession \
     .builder \
-    .appName("ps4 ex5") \
+    .appName("u4 ex5") \
     .getOrCreate()
 
 sc = spark.sparkContext
+sc.addPyFile("U4_Ex5.py")
+
 if __name__ == '__main__':
 
-    #Read the dataset
-
-#artist_alias_small.
-    ArtistAliasSmall = sc.textFile('./dataset-problemset4-ex5/AAS.txt').map(lambda line: line.split())
+#artist_alias_small. AAS
+    ArtistAliasSmall = sc.textFile('./dataset-problemset4-ex5/artist_alias_small.txt').map(lambda line: line.split())
     ArtistAliasSmallRDD = ArtistAliasSmall.map(lambda p: (p[0], p[1].strip()))
     ArtistAliasCollectedMap = ArtistAliasSmallRDD.collectAsMap()
 
-#user_artist_data_small
-    UserArtistDataSmall = sc.textFile('./dataset-problemset4-ex5/UADS.txt').map(lambda line:line.split())
+#user_artist_data_small UADS
+    UserArtistDataSmall = sc.textFile('./dataset-problemset4-ex5/user_artist_data_small.txt').map(lambda line:line.split())
     UserArtistDataSmallRDD = UserArtistDataSmall.map(lambda p: (int(p[0]), int(p[1]), int(p[2].strip())))
     UserArtistDataSmallRDD = UserArtistDataSmallRDD.map(lambda element:
                                                                 element if element[1] not in ArtistAliasCollectedMap
@@ -59,8 +59,8 @@ if __name__ == '__main__':
                                                                     (element[0], ArtistAliasCollectedMap[element[1]], element[2])
                                                         )
 
-    #artist_data_small
-    ArtistDataSmall = sc.textFile('./dataset-problemset4-ex5/ADS.txt').map(lambda line: line.split(maxsplit=1))
+    #artist_data_small ADS
+    ArtistDataSmall = sc.textFile('./dataset-problemset4-ex5/artist_data_small.txt').map(lambda line: line.split(maxsplit=1))
     ArtistDataSmallRDD = ArtistDataSmall.map(lambda p: (p[0], p[1].strip()))
 
 
@@ -68,6 +68,17 @@ if __name__ == '__main__':
     #print("UtilityMatrix:")
     #UtilityMatrix.show()
 
-    PearsonCorrelationCoefficient(UtilityMatrix, 101, 102)
+    #b) Implement a routine that calculates the similarity between users using Pearson cor- relation coefficient as similarity metric.
+    #only implement it but we do not have to use it on each and every user!!
+    #this works:
+    PearsonCorrelation = PearsonCorrelationCoefficient(UtilityMatrix, 1059637, 1052461)
 
+    #still tried it for all users but there seems to be an Pickler Error
+#    PearsonCorrelationBetweenUsers = UtilityMatrix.rdd \
+#        .map(lambda element: element[0]) \
+#        .distinct()
+#
+#    PearsonCorrelationBetweenUsersCartesian = PearsonCorrelationBetweenUsers.cartesian(PearsonCorrelationBetweenUsers)\
+#        .filter(lambda element: element[0] != element[1])\
+#        .map(lambda element: [element[0], element[1], PearsonCorrelationCoefficient(UtilityMatrix, int(element[0]), int(element[1]))])
 
