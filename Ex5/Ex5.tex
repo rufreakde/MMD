@@ -16,6 +16,7 @@
 \usepackage{pgf} % Makro zur Erstellung von Graphiken
 \usepackage{tikz} % Benutzeroberfläche für pgf
 \usepackage[margin=10pt,font=small,labelfont=bf,labelsep=endash,format=plain]{caption} % Einstellungen für Tabellen und Bildunterschriften
+
 \usepackage{listings}
 \usepackage{subcaption} % Unterschriften für mehrere Bilder
 \usepackage{enumitem} % no indentation at description environment
@@ -53,11 +54,29 @@
 
 \maketitle
 
+\section*{Exercise 04}
+	\begin{itemize}
+	\item [a)] Load the data into Spark (RDD), converting each row into Ratings3 data structure. Split your dataset through random sample, 50\% into training and the remaining 50\% into test data.
+	\begin{verbatim}
+		siehe U5_Ex4.py
+	\end{verbatim}	
+	\item [b)] Use the Spark Mlib implementation of the Alternating Least Squares (ALS)4to train the ratings. Train your model using 10 latent factors and 5 iterations. Save the model to disk after training and submit the serialized model as part of the solution.
+	\begin{verbatim}
+		look into folder "./serialized/"
+	\end{verbatim}	
+	\item [c)] Predict the ratings of the test data and estimate the prediction quality through Mean Squared Error (MSE). Submit the obtained MSE as part of the solution.
+	\begin{verbatim}
+		siehe U5_Ex4.py
+		Mean Squared Error = 1.4089626800206299
+	\end{verbatim}	
+\end{itemize}
+
 \section*{Exercise 05}
 Study the code of Albert Au Yeung for matrix factorization by GD (see slide ?References? on lecture 06).
 
 \begin{itemize}
 	\item [a)] Apply it to the utility matrix used in lecture 06 (slide "Recall: Utility Matrix"). Do you obtain the same matrices Q and P as shown in the lecture (slide "Latent Factor Models")? Submit as solutions your matrices Q, P and the full matrix R.
+
 \begin{verbatim}	
 Utility Matrix:
 [[1 0 3 0 0 5 0 0 5 0 4 0]
@@ -80,7 +99,7 @@ Q.T_Users_x_Features:
    1.29415504  0.93109973  1.51234022  0.45076068  0.18410261  0.96770206]
  [ 0.77489518  0.64644431  1.02861432  0.65986469  1.13098052  0.41409709
    1.21251738  1.40630636  0.87901893  1.10528179  0.84746994  1.64667991]]
-New_Utility_Matrix:
+New_Utility_Matrix: R
 [[ 1.04772461  3.6757977   3.03484693  2.16210581  3.16507532  4.89080778
    3.463294    2.25508736  4.92224102  2.55594999  4.12542583  5.47326927]
  [ 0.40354706  0.95116835  4.70563529  3.96658002  5.09683227  0.42732185
@@ -93,6 +112,9 @@ New_Utility_Matrix:
    3.87999505  3.4307745   4.04180258  2.56274318  2.29682484  4.55238191]
  [ 1.06077367  3.41527369  2.84481331  2.00797783  2.97326957  4.48755853
    3.26958928  2.20947145  4.54305735  2.45689111  3.85586924  5.16389207]]
+   
+   No we don't get the same results as in the lecture.
+   
 \end{verbatim}	
 	\item [b)] Modify the code so that the error e is stored (or printed after each iteration), and plot the error over iterations (for matrix in a)), as well as the differences of the error in subsequent steps.
 	\item [c)] Bonus, 3 points: In this code the learning rate "alpha" is a constant (alpha = 0.0002). How could you change the code to speed up the convergence? Explain your idea and implement your solution.
