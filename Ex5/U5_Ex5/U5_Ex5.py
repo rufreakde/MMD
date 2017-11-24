@@ -13,8 +13,16 @@ from pyspark.sql.types import *
 #sc.setLogLevel("ERROR")
 #sc.addPyFile("U5_Ex5.py")
 
+import matplotlib.pyplot as plt
+
+
+
 def matrix_factorization(FactorizedMatrix_NxM, InitialMatrix_NxK, InitialMatrix_MxK, LatestFeaturesCount, Steps=5000, LearningRate=0.0002, Regularization=0.02):
     InitialMatrix_MxK = InitialMatrix_MxK.T
+    errorList = []
+    lastError = 0
+    errDifList = []
+
     for step in range(Steps):
         for i in range(len(FactorizedMatrix_NxM)):
             for j in range(len(FactorizedMatrix_NxM[i])):
@@ -32,9 +40,21 @@ def matrix_factorization(FactorizedMatrix_NxM, InitialMatrix_NxK, InitialMatrix_
                     for k in range(LatestFeaturesCount):
                         e = e + (Regularization / 2) * (pow(InitialMatrix_NxK[i][k], 2) + pow(InitialMatrix_MxK[k][j], 2))
 
-        print("Iteration: " + str(step) + " Error: " + str(e))
+        errorList.append(e)
+        errDifList.append(lastError - e)
+        print("Iteration: " + str(step) + " Error: " + str(e) + " Diff: " + str(errDifList[len(errDifList) - 1]))
+        lastError = e;
         if e < 0.001:
             break
+
+    plt.plot(errorList)
+    plt.ylabel('Error: e')
+    plt.show()
+
+    plt.plot(errDifList)
+    plt.ylabel('differences error in subsequent steps')
+    plt.show()
+
     return InitialMatrix_NxK, InitialMatrix_MxK.T
 
 if __name__ == '__main__':
