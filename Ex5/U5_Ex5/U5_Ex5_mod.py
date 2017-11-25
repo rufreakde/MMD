@@ -11,18 +11,27 @@ from pyspark.sql.types import *
 
 #sc = spark.sparkContext
 #sc.setLogLevel("ERROR")
-#sc.addPyFile("U5_Ex5.py")
+#sc.addPyFile("U5_Ex5_mod.py")
 
-def matrix_factorization(FactorizedMatrix_NxM, InitialMatrix_NxK, InitialMatrix_MxK, LatestFeaturesCount, Steps=5000, LearningRate=0.0002, Regularization=0.02):
+import matplotlib.pyplot as plt
+
+
+
+def matrix_factorization(FactorizedMatrix_NxM, InitialMatrix_NxK, InitialMatrix_MxK, LatestFeaturesCount, Steps=1000, LearningRate=0.0002, Regularization=0.02):
+    alpha = LearningRate;
     InitialMatrix_MxK = InitialMatrix_MxK.T
+    errorList = []
+    lastError = 0
+    errDifList = []
+
     for step in range(Steps):
         for i in range(len(FactorizedMatrix_NxM)):
             for j in range(len(FactorizedMatrix_NxM[i])):
                 if FactorizedMatrix_NxM[i][j] > 0:
                     eij = FactorizedMatrix_NxM[i][j] - np.dot(InitialMatrix_NxK[i, :], InitialMatrix_MxK[:, j])
                     for k in range(LatestFeaturesCount):
-                        InitialMatrix_NxK[i][k] = InitialMatrix_NxK[i][k] + LearningRate * (2 * eij * InitialMatrix_MxK[k][j] - Regularization * InitialMatrix_NxK[i][k])
-                        InitialMatrix_MxK[k][j] = InitialMatrix_MxK[k][j] + LearningRate * (2 * eij * InitialMatrix_NxK[i][k] - Regularization * InitialMatrix_MxK[k][j])
+                        InitialMatrix_NxK[i][k] = InitialMatrix_NxK[i][k] + alpha * (2 * eij * InitialMatrix_MxK[k][j] - Regularization * InitialMatrix_NxK[i][k])
+                        InitialMatrix_MxK[k][j] = InitialMatrix_MxK[k][j] + alpha * (2 * eij * InitialMatrix_NxK[i][k] - Regularization * InitialMatrix_MxK[k][j])
         eR = np.dot(InitialMatrix_NxK, InitialMatrix_MxK)
         e = 0
         for i in range(len(FactorizedMatrix_NxM)):
@@ -32,9 +41,28 @@ def matrix_factorization(FactorizedMatrix_NxM, InitialMatrix_NxK, InitialMatrix_
                     for k in range(LatestFeaturesCount):
                         e = e + (Regularization / 2) * (pow(InitialMatrix_NxK[i][k], 2) + pow(InitialMatrix_MxK[k][j], 2))
 
-        print("Iteration: " + str(step) + " Error: " + str(e))
+        errorList.append(e)
+        errDifList.append(lastError - e)
+        print("Iteration: " + str(step) + " Error: " + str(e) + " Diff: " + str(errDifList[len(errDifList) - 1]) + " Alpha: " + str(alpha))
+        lastError = e;
+
+        if step > 1 and errDifList[step] > 0:
+            alpha *= 1.05
+        elif step > 1:
+            alpha *= 0.5
+            step = step-1
+
         if e < 0.001:
             break
+
+    plt.plot(errorList)
+    plt.ylabel('Error: e')
+    plt.show()
+
+    plt.plot(errDifList)
+    plt.ylabel('differences error in subsequent steps')
+    plt.show()
+
     return InitialMatrix_NxK, InitialMatrix_MxK.T
 
 if __name__ == '__main__':

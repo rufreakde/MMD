@@ -17,6 +17,9 @@
 \usepackage{tikz} % Benutzeroberfläche für pgf
 \usepackage[margin=10pt,font=small,labelfont=bf,labelsep=endash,format=plain]{caption} % Einstellungen für Tabellen und Bildunterschriften
 
+\usepackage{graphicx}
+\graphicspath{ {U5_Ex5/} }
+
 \usepackage{listings}
 \usepackage{subcaption} % Unterschriften für mehrere Bilder
 \usepackage{enumitem} % no indentation at description environment
@@ -118,7 +121,27 @@ New_Utility_Matrix:
    
 \end{verbatim}	
 	\item [b)] Modify the code so that the error e is stored (or printed after each iteration), and plot the error over iterations (for matrix in a)), as well as the differences of the error in subsequent steps.
+	Plot:\\
+	\includegraphics[scale=0.5]{Plot_Error}
+	\includegraphics[scale=0.5]{DEISS_Zoomed}
+	\\
+	Note: More information in file: Error\_Values.txt
+	
 	\item [c)] Bonus, 3 points: In this code the learning rate "alpha" is a constant (alpha = 0.0002). How could you change the code to speed up the convergence? Explain your idea and implement your solution.
+	There are several aproaches to this problem:
+		\begin{itemize}
+		\item 1. One is to set alpha to a value and divide it by the number of data (alpha/N)
+		\item 2. Another one is the "Bold Driver" method where the alpha is changed in every iteration. If the error decreases you have to increase the alpha learning rate. If the error value increases (because we jumped over a minima) then you go 1 iteration back and decrease the learning-rate alpha.
+		\item 3. Another: where you start with a "big" alpha and decrease it in every iteration with a appropriate value
+		
+		My Idea is Option (2) implementation code:\\
+		 look into: U5\_Ex5\_mod.py\\
+		 \includegraphics[scale=0.5]{Plot_Error_modAlpha}
+		\includegraphics[scale=0.5]{DEISS_Zoomed_modAlpha}
+		
+		
+		
+	\end{itemize}
 \end{itemize}
 	
 \end{document}
