@@ -117,3 +117,5 @@ ENV/
 *.fdb_latexmk
 
 *.gz
+
+Ex5/U5_Ex5/\.idea/workspace\.xml
