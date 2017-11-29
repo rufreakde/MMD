@@ -58,12 +58,6 @@
 \maketitle
 
 \section*{Exercise 01}
-\subsection*{(a)}
-\begin{itemize}
-\item global effects: The recommendations by this system would be very general. Since the algorithm use just biases it's not really exact which movies to suggest a user. Therefore in the recommendations there are more likely exotic items (because high rated movies with no connection to rated movies by the user can be in the list).
-\item regional effects: With this system there are movies recommended that are in the same genre or have something similar to the rated movies of the user.
-\item local effects: With this system there will be just movies recommended that are similar to the rated movies of an user.
-\end{itemize}
 
 \section*{Exercise 02}
 
@@ -72,7 +66,17 @@
 \section*{Exercise 04}
 
 \section*{Exercise 05}
+\begin{itemize}
+\item [a)] Jaccard similartity: 1/6 = 0.166
+\item [b)] If we choose a permutation at random, the probability that it will produce the same minhash values for two sets is the same as the Jaccard similarity of those sets. Since the estimate of the Jaccard similarity of $S_1$ and $S_2$ is $1/6$ the fraction of 120 random permutations for those two columns that produce the same hash values is of size $120 * (1/6) = 20$.
+\end{itemize}
 
 \section*{Exercise 06}
-	
+2 Other Hash function alternatives:
+\begin{itemize}
+\item [1)] \textbf{Message-Digest algorithm 5} (MD5) (Note: counts also as not secure anymore)
+\item [2)] \textbf{Fast Fourier transform algorithm} (
+\item [R.t.] A \textbf{Rainbow table} is typically stored as a Database and contains of pre calculated hashes (or encryptions) of values. (In this context password strings.) It is used to lookup "common" passwords and compare the value of the password you want to get and the rainbow table, instead of making calculations to get those specific values. This is often much faster if the password is not complex.
+\item [Salt] \textbf{Salt} is a random string of characters that is different for every single user. Salt will be generated and gets merged with the user-password. After that an algorithm hashes the new string this hash gets stored into the Database.
+\end{itemize}
 \end{document}
