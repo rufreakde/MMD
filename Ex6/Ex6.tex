@@ -76,7 +76,9 @@ If we choose all permutations at (120), the probability that it will produce the
 2 Other Hash function alternatives:
 \begin{itemize}
 \item [1)] \textbf{Message-Digest algorithm 5} (MD5) (Note: counts also as not secure anymore)
-\item [2)] \textbf{Fast Fourier transform algorithm} (
+		MD5 ist a hash function for computing a 128-bit, fixed-length message digest from an arbitrary length binary input.
+\item [2)] \textbf{Fast Fourier transform algorithm}
+		A fast Fourier transform (FFT) is an algorithm that samples a signal over a specified time and divides it into its frequency components.
 \item [R.t.] A \textbf{Rainbow table} is typically stored as a Database and contains of pre calculated hashes (or encryptions) of values. (In this context password strings.) It is used to lookup "common" passwords and compare the value of the password you want to get and the rainbow table, instead of making calculations to get those specific values. This is often much faster if the password is not complex.
 \item [Salt] \textbf{Salt} is a random string of characters that is different for every single user. Salt will be generated and gets merged with the user-password. After that an algorithm hashes the new string this hash gets stored into the Database.
 \end{itemize}
