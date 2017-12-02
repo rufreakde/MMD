@@ -59,6 +59,12 @@
 
 \section*{Exercise 01}
 
+I think of two different approaches.
+\begin{enumerate}
+\item In the first approach we count same items as if they are different. So we just ignore the property of a multiset and count every item as one, even if they are duplicates.
+\item The second approach would count duplicate items with smaller weight. So for the first of many same items $x$ the weight is $1$. For every item that is identical to $x$ the weight is either $0.5$ or gets halved every time an identical item appears. I think this approach is the better of the two presented. In the case that the two parameters are just sets, every item has the weight $1$.
+\end{enumerate}
+
 \section*{Exercise 02}
 
 \section*{Exercise 03}
