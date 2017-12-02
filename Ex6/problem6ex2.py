@@ -1,43 +1,44 @@
-from pyspark import SparkContext
-import numpy as np
 from pyspark.sql import *
-from pyspark.sql.types import *
-
-spark = SparkSession \
-    .builder \
-    .appName("u6 ex2") \
-    .getOrCreate()
-
-sc = spark.sparkContext
-sc.addPyFile("problem6ex2.py")
-
-def filter_hyphen(element):
-    if element[len(element)-1] is "-":
-        return element[0:len(element)-1]
-    else:
-        return element
-
-def shingle(element, k):
-    return element
+import re
+import sys
 
 if __name__ == '__main__':
-    k = 5
+    if len(sys.argv) != 3:
+        print("Usage: problem6ex2 needs arguments: -k <value>")
+        print("Argumentlist: " + sys.argv)
+        exit(-1)
 
-    strings = ["hjgzuds", "ihuihiiu -", "kj-hkjhkjh -"]
-    rdd = sc.parallelize(strings)\
-        .map(lambda e: filter_hyphen(e))\
-        .flatMap(lambda e: e)\
-        .map(lambda e: shingle(e, k))
-    #rdd2 = rdd.flatMap(lambda e: e).filter(lambda e: e is not "h")
+    shingleSize = int(sys.argv[2])
 
-    print(rdd)
+    spark = SparkSession \
+        .builder \
+        .appName("u6-ex2-GenCharShingles") \
+        .getOrCreate()
 
+    sc = spark.sparkContext
+    sc.addPyFile("problem6ex2.py")
 
-    #files = ["pg44016.txt"]
+#Read all files automatic with spark and format them right for thurder use
+    #delete - at line end and delete line end afterwards (replace with space)
+    documents = sc.wholeTextFiles('./textfiles') \
+        .mapValues(lambda txt: re.sub('-(\r)?\n', '', txt))\
+        .mapValues(lambda txt: re.sub('(\r)?\n', ' ', txt))\
+        .zipWithIndex()
 
-    #for filename in files:
-    #    temp_rdd = sc.textFile("./textfiles/" + filename)
-    #    col = temp_rdd.take(10)
-    #    print(col)
+#Tthis is the shingle dataset with K=9 over 10 documents in folder textfiles
+    shingled = documents.map(lambda item: (item[1], item[0][1])) \
+        .flatMapValues(lambda element: [element[start:start + shingleSize] for start in range(0, len(element))]) \
+        .distinct()
 
-sc.stop()
+#THIS PART IS JUST FOR COMPARE PRINTING!
+    outputForCompare = shingled \
+        .map(lambda element: (element[0], 1)) \
+        .reduceByKey(lambda a, b: a + b) \
+
+    print_key_val_pair = documents.map(lambda item: (item[1], item[0][0].split('/')[-1]))
+
+    new = outputForCompare.join(print_key_val_pair)
+
+    print("k == " + str(shingleSize))
+    print("pg44016 == The White Spark, by Orville Livingston Leach")
+    print(new.collect())
