@@ -70,20 +70,19 @@ I think of two different approaches.
 	look into: problem6ex2.py
 	arguments: -k <value>
 	bookindex / shindleCount / book
-	
 k == 9
 pg44016 == The White Spark, by Orville Livingston Leach
 [(0, (342585, 'pg56086.txt')),
 (4, (420579, 'pg56089.txt')),
 (8, (142339, '56095-0.txt')), 
 (1, (192938, '56100-0.txt')),
-(5, (182151, '56090-0.txt')),
-(9, (88303, 'pg44016.txt')),
+(5, (182151, '56090-0.txt')),\end{verbatim}
+\textbf{(9, (88303, 'pg44016.txt'))},
+\begin{verbatim}
 (2, (352263, '56094-0.txt')),
 (6, (188526, 'pg56101.txt')),
 (3, (362489, 'pg56098.txt')),
 (7, (210685, '56097-0.txt'))]
-
 
 k == 5
 pg44016 == The White Spark, by Orville Livingston Leach
@@ -92,15 +91,16 @@ pg44016 == The White Spark, by Orville Livingston Leach
 (8, (43514, '56095-0.txt')), 
 (1, (53273, '56100-0.txt')), 
 (5, (49222, '56090-0.txt')), 
-(9, (36384, 'pg44016.txt')), 
+\end{verbatim}
+\textbf{(9, (36384, 'pg44016.txt'))}, 
+\begin{verbatim}
 (2, (88898, '56094-0.txt')), 
 (6, (56182, 'pg56101.txt')), 
 (3, (78756, 'pg56098.txt')), 
 (7, (53720, '56097-0.txt'))]
-
 \end{verbatim}
 \section*{Exercise 03}
-
+	look into problem6ex3.pdf
 \section*{Exercise 04}
 
 Given are two sets $A$ and $B$. The Jaccard Similarity is zero if there are no items that are in both in $A$ and $B$. When applying the minhashing algorithm it doesn't matter which permutation is used, the values for the two sets will never be the same since there are no identical values in the two sets. The similarity with the minhashing algorithm then will also be zero since every value is different.
@@ -109,7 +109,9 @@ Given are two sets $A$ and $B$. The Jaccard Similarity is zero if there are no i
 \begin{itemize}
 \item [a)] Jaccard similartity: 1/5 = 0.2 (intersection/union)
 \item [b)] 
-If we choose all permutations at (120), the probability that it will produce the same minhash values for two sets is the same as the Jaccard similarity of those sets. Since the estimate of the Jaccard similarity of $S_1$ and $S_2$ is $1/5$ the fraction of 120 random permutations for those two columns that produce the same hash values is of size $120 * (1/5) = 24$.
+If we have all permutations (120), the probability that it will produce the same minhash values for two sets is the same as the Jaccard similarity of those sets. Since the estimate of the Jaccard similarity of $S_1$ and $S_2$ is $1/5$ the fraction of 120 permutations, for those two columns, that produce the same hash values is of size $120 * (1/5) = 24$.
+
+\textbf{Prove:} If we look into all possible constellations where the same minhash will be produced, element d (where $S_1$ = $S_2$ = 1) has to be hashed to the minimum value, there are 4 rows remaining, which can be permutated in any way. Its faculty of 4 which is also 24!\\\\\\
 \end{itemize}
 
 \section*{Exercise 06}
@@ -119,7 +121,7 @@ If we choose all permutations at (120), the probability that it will produce the
 		MD5 ist a hash function for computing a 128-bit, fixed-length message digest from an arbitrary length binary input.
 \item [2)] \textbf{Fast Fourier transform algorithm}
 		A fast Fourier transform (FFT) is an algorithm that samples a signal over a specified time and divides it into its frequency components.
-\item [R.t.] A \textbf{Rainbow table} is typically stored as a Database and contains of pre calculated hashes (or encryptions) of values. (In this context password strings.) It is used to lookup "common" passwords and compare the value of the password you want to get and the rainbow table, instead of making calculations to get those specific values. This is often much faster if the password is not complex.
-\item [Salt] \textbf{Salt} is a random string of characters that is different for every single user. Salt will be generated and gets merged with the user-password. After that an algorithm hashes the new string this hash gets stored into the Database.
+\item [R.t.] A \textbf{Rainbow table} is typically stored as a Database and contains a huge ammount of pre calculated hashes (or encryptions) of values. (In this context password strings.) It is used to lookup "common" passwords and compare the value of the password you want to get and the rainbow table, instead of making calculations to get those specific values. This is often much faster if the password is not complex.
+\item [Salt] \textbf{Salt} is a random string of characters that is different for every single user. Salt will be generated and gets merged with the user-password before hashing. After that an algorithm hashes the new string this hash gets stored into the Database.
 \end{itemize}
 \end{document}
