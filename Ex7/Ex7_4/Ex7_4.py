@@ -1,15 +1,18 @@
 
 from pyspark.sql import *
+from pyspark import *
 from pyspark.sql.types import *
 import sys
+from collections import Counter
+from operator import add
 
 def returnDataFrame():
     #Read all files and create an RDD for each file
     DatasetPath = pathToFileFolder + ".txt.gz"
     Schema = StructType([
         StructField("Type", StringType(), True),
-        StructField("Price", DecimalType(8, 6), True), #DecimalType(7, 6)
-        StructField("Timestamp", TimestampType(), True), #TimestampType()
+        StructField("Price", FloatType(), True), #alternatively: DecimalType(8, 7)
+        StructField("Timestamp", TimestampType(), True), #alternatively: DateType()
         StructField("InstanceType", StringType(), True),
         StructField("ProductDescription", StringType(), True),
         StructField("AvailabilityZone", StringType(), True)])
@@ -19,8 +22,14 @@ def returnDataFrame():
 
     return returnDF;
 
+def reduceFunc(elem):
+    print(elem)
+    return elem
+
 def checkDataFrame(df):
-    foundDF.show()
+    relevantTable: DataFrame = df.select(df['Price'], df['InstanceType'], df['ProductDescription'])
+    result = relevantTable.groupBy("InstanceType", "ProductDescription").avg("Price")
+    result.show(100)
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
