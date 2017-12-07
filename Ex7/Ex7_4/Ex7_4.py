@@ -1,0 +1,47 @@
+
+from pyspark.sql import *
+from pyspark.sql.types import *
+import sys
+
+def returnDataFrame():
+    #Read all files and create an RDD for each file
+    DatasetPath = pathToFileFolder + ".txt.gz"
+    Schema = StructType([
+        StructField("Type", StringType(), True),
+        StructField("Price", DecimalType(8, 6), True), #DecimalType(7, 6)
+        StructField("Timestamp", TimestampType(), True), #TimestampType()
+        StructField("InstanceType", StringType(), True),
+        StructField("ProductDescription", StringType(), True),
+        StructField("AvailabilityZone", StringType(), True)])
+
+    dataFrame = spark.read.csv(DatasetPath, sep='\t', header=True, schema=Schema, timestampFormat="yyyy-MM-dd'T'HH:mm:ss")
+    returnDF = dataFrame.drop("Type")
+
+    return returnDF;
+
+def checkDataFrame(df):
+    foundDF.show()
+
+if __name__ == '__main__':
+    if len(sys.argv) != 3:
+        print("Usage: Ex7_4 needs arguments:\n -f <./Path/To/Folder/FileName>")
+        print("Argumentlist: ", sys.argv)
+        exit(-1)
+
+    pathToFileFolder = ''
+    if(sys.argv[1] == '-f'):
+        pathToFileFolder = str(sys.argv[2])
+    else:
+        print("ERROR: No File specified\nArgumentlist: " + sys.argv)
+
+    spark = SparkSession \
+        .builder \
+        .appName("u7-ex4-DataFrames") \
+        .getOrCreate()
+
+    sc = spark.sparkContext
+    sc.addPyFile("Ex7_4.py")
+
+    foundDF = returnDataFrame()
+
+    checkDataFrame(foundDF)
