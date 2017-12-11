@@ -6,7 +6,7 @@ import sys
 from collections import Counter
 from operator import add
 
-def returnDataFrame():
+def returnDataFrame(pathToFileFolder, spark):
     #Read all files and create an RDD for each file
     DatasetPath = pathToFileFolder + ".txt.gz"
     Schema = StructType([
@@ -21,10 +21,6 @@ def returnDataFrame():
     returnDF = dataFrame.drop("Type")
 
     return returnDF;
-
-def reduceFunc(elem):
-    print(elem)
-    return elem
 
 def checkDataFrame(df):
     relevantTable: DataFrame = df.select(df['Price'], df['InstanceType'], df['ProductDescription'])
@@ -51,6 +47,6 @@ if __name__ == '__main__':
     sc = spark.sparkContext
     sc.addPyFile("Ex7_4.py")
 
-    foundDF = returnDataFrame()
+    foundDF = returnDataFrame(pathToFileFolder, spark)
 
     checkDataFrame(foundDF)
