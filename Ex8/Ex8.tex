@@ -65,7 +65,7 @@
 	QuestionCount = r \\
 	QuestionCountSum = $b * r$\\
 	MatchCondition = if($mQ_x$(r) == $fQ_x(r)$) //m = person1, f = person2, x = element of b\\
-	$Probability-of-an-event-happening$ =  $\frac{Number-of-ways-it-can-happen}{Total-number-of-outcomes}$\\
+	$Probability-of-an-event-happening$ =  $\frac{Number\ of\ ways\ it\ can\ happen}{Total\ number\ of\ outcomes}$\\
 	Propability that 1 Questionair matsches: $(\frac{1}{r})^r * b$\\
 	
 	HIER BRAINSTORME ICH EINFACH NICHT BEACHTEN :D
@@ -81,10 +81,43 @@ MISSING
 MISSING
 
 \section*{Exercise 04}
-MISSING
+\begin{itemize}
+	\item BALANCE Algorithm:\\
+		For each query, assign it to an advertiser with the
+		largest unspent budget (i.e. largest BALANCE) A(x,y) B(x,z)\\
+		Worst Case Szenarios:
+
+	\item[a)] xyyy - AA\_\_ ( since there are 3 $y$ no optimal solution possible, $A$ has only 2 dollars.)
+	
+	\item[b)] xyyx - A\_AB (optimal solution is possible but not certain BAAB)
+	
+	\item[c)] yyxx - AABB (Optimal)
+	
+	\item[d)] xzyz - BBA\_ (optimal solution is possible but not certain ABAB)
+	
+	\item Since we used the worst case possible query assignment with the balance Algorithm we can show that only $c)$ 			would give an optimal solution. All the other queries have situations where an optimal solution is not certain.
+		$c$'s optimal solution is because A and B cant steal from each other, because their budget is empty before the other 		can take anything from their common $x$.
+		
+\end{itemize} 
 
 \section*{Exercise 05}
-MISSING
+\begin{itemize}
+	\item budget: 3 / ties in favor of lower index
+	\item $A_1(Q_1,Q_2)$ $A_2(Q_2,Q_3)$ $A_3(Q_3,Q_4)$ $A_4(Q_1,Q_4)$
+	\item Query: $Q_1, Q_2, Q_3, Q_3, Q_1, Q_2, Q_3, Q_1, Q_4, Q_1, Q_4$
+
+	\item[a)] What is the sequence of advertisers that the BALANCE algorithm will yield? \\
+			$A_1,A_2,A_3,A_2,A_4,A_1,A_3,A_4,A_3,A_1,A_4$\\
+	What is the competitive ratio for this instance?\\
+	$Competitive\ ratio = min_(all\ possible\ inputs)\frac{|M_(greedy)|}{(|M_(opt|))})$
+	
+	
+	
+	\item[b)] Rearrange the sequence of queries so that BALANCE results in a worse competitive ratio.\\
+		Query: $Q_1, Q_1, Q_1, Q_1, Q_4, Q_4, Q_2, Q_2, Q_3, Q_3, Q_3$\\
+		$A_1,A_4,A_1,A_4,A_3,A_3,A_2,A_2,A_2,A_3, \_\_$
+\end{itemize} 	
+	
 
 \section*{Exercise 06}
 MISSING
