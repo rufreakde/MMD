@@ -27,7 +27,7 @@ def checkDataFrame(df):
     rows = relevantTable.collect()  # a dataset just have about 100-200 distinct lines. thats why we can collect here
     for row in rows:
         temp = df.select(df.Timestamp, df.Price).where((df.InstanceType == row["InstanceType"]) & (df.ProductDescription == row["ProductDescription"]) & (df.AvailabilityZone == row["AvailabilityZone"]))
-        dict[row["InstanceType"] + " " + row["ProductDescription"] + " " + row["AvailabilityZone"]] = temp
+        dict[row["InstanceType"] + ", " + row["ProductDescription"] + ", " + row["AvailabilityZone"]] = temp
     dict['c4.2xlarge Linux/UNIX ap-northeast-2c'].show()  # test output
 
 if __name__ == '__main__':
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
     spark = SparkSession \
         .builder \
-        .appName("u7-ex4-DataFrames") \
+        .appName("u8-ex6a-DataFrames") \
         .getOrCreate()
 
     sc = spark.sparkContext
