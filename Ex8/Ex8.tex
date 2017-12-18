@@ -7,6 +7,7 @@
 \usepackage{amsmath} % zusätzliche mathematische Umgebungen
 \usepackage{amssymb} % zusätzliche mathematische Symbole
 %\usepackage{bbold} % zusätzliche mathematische Symbole
+\usepackage{ upgreek }
 \usepackage{units} % schöne Einheiten und Brüche
 \usepackage{icomma} % kein Leerzeichen bei 1,23 in Mathe-Umgebung
 \usepackage{wrapfig} % von Schrift umflossene Bilder und Tabellen
@@ -145,5 +146,7 @@ I guess spark had problems with my filesystem (maybe access rights), but I don't
 \end{itemize}
 
 \section*{Exercise 07}
-MISSING
+
+Since the beginning every bidder has the same budget and the same bids, value for $\Uppsi_i(q) = x_i (1 - e^{-f_i)}$ is equal across all bidders. Thats why the algorithm makes the decision randomly and the chosen bidders $i$ budget will be reduced by one. It's $-f_i$ will also decrease. As $x_i$ will never change this bidder will be unfavored for the next step. The conclusion is that since the bidding is the same the algorithm will perform as the basic balance algorithm.
+
 \end{document}
