@@ -10,7 +10,7 @@ import shutil
 
 def returnDataFrame(pathToFileFolder, spark):
     # Read all files and create an RDD for each file
-    DatasetPath = pathToFileFolder + ".txt.gz"
+    DatasetPath = pathToFileFolder
     Schema = StructType([
         StructField("Type", StringType(), True),
         StructField("Price", FloatType(), True),  # alternatively: DecimalType(8, 7)
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     for file in os.listdir("./EC2-prices"):
         if file.endswith(".txt.gz"):
             data_files.append("./EC2-prices/" + file)
-
+    print(data_files)
     spark = SparkSession \
         .builder \
         .appName("u8-ex6c-DataFrames") \
@@ -80,6 +80,8 @@ if __name__ == '__main__':
     for file in data_files:
         foundDF = returnDataFrame(file, spark)
         dict = checkDataFrame(foundDF)
-        saveTimeseries("m4.16xlarge, Linux/UNIX, ca-central-1a", dict["m4.16xlarge, Linux/UNIX, ca-central-1a"])
+        print(dict)
+        if 'm4.16xlarge, Linux/UNIX, ca-central-1a' in dict.keys():
+            saveTimeseries("m4.16xlarge, Linux/UNIX, ca-central-1a", dict["m4.16xlarge, Linux/UNIX, ca-central-1a"])
 
     sc.stop()
