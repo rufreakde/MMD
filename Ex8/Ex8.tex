@@ -64,14 +64,16 @@
 	QuastionnairesCount = b ( $Q_1$, ... , $Q_b$ )\\
 	QuestionCount = r \\
 	QuestionCountSum = $b * r$\\
-	MatchCondition = if($mQ_x$(r) == $fQ_x(r)$) //m = person1, f = person2, x = element of b\\
-	$Probability-of-an-event-happening$ =  $\frac{Number\ of\ ways\ it\ can\ happen}{Total\ number\ of\ outcomes}$\\
-	Propability that 1 Questionair matsches: $(\frac{1}{r})^r * b$\\
-	
-	HIER BRAINSTORME ICH EINFACH NICHT BEACHTEN :D
+	Propability for one Questionair that it matsches: $p^r$\\
+	Probability for one Questionair that it doesnt match: $(1-p)^r$\\ 
+	Probability that at least one Q. Matches: $1-(1-p)^r$
 	
 	\item[b)] The probability that exactly two (no matter which) questionnaires match, i.e. have
-the same answers for both C1 and C2.
+the same answers for both C1 and C2.\\
+	binomial coefficient\\
+	formula: \\
+	$\binom{b}{2} * (p^r)^2 * (1-(p^r))^{b-2}$
+
 \end{itemize} 
 
 \section*{Exercise 02}
@@ -89,7 +91,7 @@ MISSING
 
 	\item[a)] xyyy - AA\_\_ ( since there are 3 $y$ no optimal solution possible, $A$ has only 2 dollars.)
 	
-	\item[b)] xyyx - A\_AB (optimal solution is possible but not certain BAAB)
+	\item[b)] xyyx - AA\_B (optimal solution is possible but not certain BAAB)
 	
 	\item[c)] yyxx - AABB (Optimal)
 	
@@ -110,8 +112,6 @@ MISSING
 			$A_1,A_2,A_3,A_2,A_4,A_1,A_3,A_4,A_3,A_1,A_4$\\
 	What is the competitive ratio for this instance?\\
 	$Competitive\ ratio = min_(all\ possible\ inputs)\frac{|M_(greedy)|}{(|M_(opt|))})$
-	
-	
 	
 	\item[b)] Rearrange the sequence of queries so that BALANCE results in a worse competitive ratio.\\
 		Query: $Q_1, Q_1, Q_1, Q_1, Q_4, Q_4, Q_2, Q_2, Q_3, Q_3, Q_3$\\
