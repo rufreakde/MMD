@@ -124,6 +124,26 @@ siehe Ex8\_2\_3
 \section*{Exercise 06}
 siehe Ex8\_6.py
 
+\begin{itemize}
+\item[a)] see \textit{Ex8\_6a.py}
+\item[b)]
+see \textit{Ex8\_6b.py}\\\\
+I had a problem while overwriting the old data. The error code was:
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+\begin{lstlisting}
+java.io.FileNotFoundException: File file:/home/immd-user/IdeaProjects/immd-project-example/timeseries/c4large_LinuxUNIX_ap-northeast-2c/part-00000-2590b8cb-3bc6-4592-a5c2-fc22a6742ef2-c000.csv does not exist
+It is possible the underlying files have been updated. You can explicitly invalidate the cache in Spark by running 'REFRESH TABLE tableName' command in SQL or by recreating the Dataset/DataFrame involved.
+\end{lstlisting}
+I guess spark had problems with my filesystem (maybe access rights), but I don't know exactly. The solution was to write in a temp folder, delete the old one and rename the temp folder.
+\item[c)] see \textit{Ex8\_6c.py}
+\end{itemize}
+
 \section*{Exercise 07}
 MISSING
 \end{document}
