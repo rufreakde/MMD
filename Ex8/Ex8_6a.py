@@ -29,6 +29,7 @@ def checkDataFrame(df):
         temp = df.select(df.Timestamp, df.Price).where((df.InstanceType == row["InstanceType"]) & (df.ProductDescription == row["ProductDescription"]) & (df.AvailabilityZone == row["AvailabilityZone"]))
         dict[row["InstanceType"] + ", " + row["ProductDescription"] + ", " + row["AvailabilityZone"]] = temp
     dict['c4.2xlarge Linux/UNIX ap-northeast-2c'].show()  # test output
+    return dict
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
@@ -51,5 +52,5 @@ if __name__ == '__main__':
 
     foundDF = returnDataFrame(pathToFileFolder, spark)
 
-    checkDataFrame(foundDF)
+    dict = checkDataFrame(foundDF)
     sc.stop()

@@ -26,7 +26,7 @@ def returnDataFrame(pathToFileFolder, spark):
 
 def checkDataFrame(df):
     dict = {}
-    relevantTable = df.select(df['InstanceType'], df['ProductDescription'], df['AvailabilityZone']).distinct().limit(2)
+    relevantTable = df.select(df['InstanceType'], df['ProductDescription'], df['AvailabilityZone']).distinct()
     rows = relevantTable.collect()  # a dataset just have about 100-200 distinct lines. thats why we can collect here
     for row in rows:
         temp = df.select(df.Timestamp, df.Price).where((df.InstanceType == row["InstanceType"]) & (df.ProductDescription == row["ProductDescription"]) & (df.AvailabilityZone == row["AvailabilityZone"]))
@@ -42,40 +42,22 @@ def saveTimeseries(name, D):
     :param D: the price-timeseries to save
     :return: void
     '''
-    D.printSchema()
     name_splits = name.split(",")
     if len(name_splits) != 3:
         return "filename didn't pass restriction"
 
     join = "_".join(name_splits)
-    filename = join.replace("/", "_").replace(" ", "_")
-    print(filename)
+    dir_name = "./timeseries/" + join.replace("/", "").replace(" ", "_").replace(".", "")  # replace unwanted chars
 
-    datafile = ""
-    if os.path.isdir(filename):
-        filenames = listdir(filename)
-        for file in filenames:
-            if file.endswith(".csv"):
-                datafile = file
-    print(datafile)
-    if datafile != "":
-        print("existiert")
-        #  load dataframe and merge the two
-        Schema = StructType([
-            StructField("Timestamp", TimestampType(), True),
-            StructField("Price", FloatType(), True)])
-
-        load_df = spark.read.csv(filename + "/" + datafile, header=True, schema=Schema, timestampFormat="yyyy-MM-dd'T'HH:mm:ss")
-        merged = D.union(load_df).distinct()
-        merged.show(3)
-        print(merged.count())
-        merged.printSchema()
-        merged.write.csv("./temp", mode="overwrite", header=True)
-        shutil.rmtree(filename)
-        os.rename("./temp", "./"+filename)
+    if os.path.isdir(dir_name):
+        load_df = spark.read.csv(dir_name, header=True, schema=D.schema)
+        df = D.union(load_df)
+        df.distinct().write.csv("./timeseries/temp", header=True, mode="overwrite")
+        # see pdf why i do this!
+        shutil.rmtree(dir_name)
+        os.rename("./timeseries/temp", dir_name)
     else:
-        # save dataframe to disk
-        D.write.csv("./"+filename, mode="overwrite", header=True)
+        D.distinct().write.csv(dir_name, header=True)
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
