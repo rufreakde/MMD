@@ -59,7 +59,40 @@
 \maketitle
 
 \section*{Exercise 01}
-MISSING
+\begin{itemize}
+	\item[a)] If the support threshold is 5, all elements having at least 5 multiples $leq$ 100 are considered frequent. Thus element 1 to 20 are frequent. 
+	\item[b)] Pairs of items can only be frequent if the single items are frequent as well. Thus we only have to consider the elements 1 to 20. If one element is a multiple of the other, then the pair is frequent. For two elements having no common divisor we consider the least common multiple of the two elements and check whether this number has at least five multiplicates $\leq$ 100. Frequent pairs are according to this:
+	\begin{verbatim}
+	{1, 2}, {1, 3}, {1, 4},...,{1, 20}
+	{2, 3}, {2, 4}, {2, 5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {2, 10}, {2, 12}, {2, 14}, 
+	{2, 16}, {2, 18}, {2, 20}
+	{3, 4}, {3, 5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {3, 12}, {3, 15}, {3, 18} 
+	{4, 5}, {4, 6}, {4, 8}, {4, 10}, {4, 12}, {4, 16}, {4, 20}
+	{5, 10}, {5, 15}, {5, 20}
+	{6, 12}
+	{7, 14}
+	{8, 16}
+	{9, 18}
+	{10, 20} 
+	\end{verbatim}
+	
+	\item[c)] Let $n$ be the total number of elements, in our case $n = 100$, and $s$ be the size of all baskets. Then $s$ can be estimated by the following formula 
+	\begin{align*}
+		s &= n + \frac{1}{2}n + \frac{1}{3}n + ... + \frac{1}{100}n \\
+		&= n (1 + \frac{1}{2}+...+ \frac{1}{100}) \\
+		&= n ln(n)
+	\end{align*}
+	
+	\item[d)] The confidence of an association rule I $\rightarrow$ j is given by 
+	\begin{align*}
+		conf(I \rightarrow j) = \frac{support(I \cup j)}{support(I)}
+	\end{align*}
+	\begin{itemize}
+		\item Thus for $\{5, 7\} \rightarrow 2$ we have $\{5, 7\}$ appearing in 2 baskets (35 and 70) and \{5,7,2\} appearing in 1 basket (70). Thus we yield: $conf = \frac{1}{2}$
+		\item $\{2,3,4\}$ appear in baskets 12, 24, 36, 48, 60, 72, 84, 96, while $\{2,3,4,5\}$ appear in basket 60. We yield: $conf = \frac{1}{8}$.
+	\end{itemize}
+	
+\end{itemize}
 
 \section*{Exercise 02}
 MISSING
