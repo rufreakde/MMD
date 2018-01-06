@@ -51,7 +51,7 @@
 
 % make Titel
 \title{Mining massive Datasets WS 2017/18}
-\subtitle{Problem Set 8}
+\subtitle{Problem Set 9}
 \author{Rudolf Chrispens, Marvin Klaus, Daniela Schacherer}
 
 \begin{document}
@@ -157,6 +157,13 @@ Pairs  & \begin{tabular}[c]{@{}l@{}}(1,5)\\ (2,6)\end{tabular} & \begin{tabular}
 \end{itemize} 
 
 \section*{Exercise 04}
-MISSING
+
+\begin{itemize}
+
+\item[a)] The total number of pairs is $n(n-1)/2$ where $n$ is the total number of items ($I$). Since four bytes needed for every element the total space needed is 4 times the number of pairs. Approximately by $2n^2$.
+\item[b)] Since just pairs with $i < j$ are stored and every pair can be nonzero, the maximal number of nonzero pairs is the number of pairs stored $n(n-1)/2$.
+\item[c)] The triples method use tree times the memory for a pair, where the count is greater than zero. This means that the triple method will use less space if there are less then $1 / 3$ pairs with a count greater than $0$.
+
+\end{itemize}
 
 \end{document}
