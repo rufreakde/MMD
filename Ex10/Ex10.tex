@@ -59,5 +59,35 @@
 \maketitle
 
 \section*{Exercise 01}
+Let the input to the hash functions and thus the elements in $S$ be binary strings $s$. Then possible hash functions for a bloom filter could be
+\begin{itemize}
+	\item h1 takes every third position of $s$ starting from position 0, treats them as a number and computes modulo 11
+	\item h2 takes every third position of $s$ starting from position 1, treats them as a number and computes modulo 11
+	\item h1 takes every third position of $s$ starting from position 2, treats them as a number and computes modulo 11
+\end{itemize}
+
+These hash functions are independent from each other as they use different elements of $s$ for computing the hash value.
+
+\section*{Exercise 02}
+\begin{itemize}
+	\item[a)] The probability that a random element ($m=1$) gets hashed to a given bit in the bit array with $n=5$ can be computed by the following formula:
+	\begin{align*}
+		1-(1-\frac{1}{n})^{n(m/n)} = 1 - e^{-m/n} = 1 - e^{-1/5} = 0.1813
+	\end{align*}
+	For $h_1(x)$ each bit is equally likely to be hit. For $h_2(x)$ this is not the case as $2x+3$ always results in an odd number which will then be taken modulo 5. \\
+	Bit array state: $\vert$ 1 $\vert$ 0 $\vert$ 0 $\vert$ 0 $\vert$ 1 $\vert$
+	\item[b)] With $k=2, n=5$ and $m=1$ unknown the probability for false positives is:
+	\begin{align*}
+		(1-e^{-km/n})^k = (1-e^{-2/5})^2 = 0.109 
+	\end{align*}
+\end{itemize}
+
+\section*{Exercise 03}
+With the same formula as in Exercise 2b we receive with $n=8$ billion, $m=1$ billion and $k=3$
+\begin{align*}
+	(1-e^{-km/n})^k = (1-e^{-3*1/8})^3 = 0.0306
+	\intertext{with $k=4$ we get}
+	(1-e^{-4*1/8})^4 = 0.024
+\end{align*}
 
 \end{document}
