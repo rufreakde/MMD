@@ -90,4 +90,29 @@ With the same formula as in Exercise 2b we receive with $n=8$ billion, $m=1$ bil
 	(1-e^{-4*1/8})^4 = 0.024
 \end{align*}
 
+\section*{Exercise 03}
+\begin{verbatim}
+	a) 
+		see function "checkCoherency" in ex10_6.py
+	b) 
+		see function "checkCompleteness" in ex10_6.py
+	c)	timeseries related to prices- ca-central
+		checkCoherency
+			number of found inconsistencies:  27
+		checkCompleteness
+			number of found inconsistencies:  37
+\end{verbatim}
+
+\begin{table}[]
+\centering
+\caption{Example Completeness}
+\label{my-label}
+\begin{tabular}{lll}
+\hline
+\multicolumn{1}{|l|}{price-series-name} & \multicolumn{1}{l|}{timestamp-gap-start} & \multicolumn{1}{l|}{timestamp-gap-end} \\ \hline
+t2.micro\_\_\_Linux-...                 & 2017-11-29 02:00:26                      & 2017-11-28 02:00:06                   
+\end{tabular}
+\end{table}
+	
+
 \end{document}
