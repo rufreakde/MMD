@@ -113,6 +113,13 @@ With the same formula as in Exercise 2b we receive with $n=8$ billion, $m=1$ bil
 t2.micro\_\_\_Linux-...                 & 2017-11-29 02:00:26                      & 2017-11-28 02:00:06                   
 \end{tabular}
 \end{table}
+
+\section*{Exercise 04}
 	
+\begin{itemize}
+\item[a)] The keys for this problem should be \textit{(university, course)}. So we geht $\frac{1}{20}$ of all courses. Now we could group by this keys and count up the number of students. For every key \textit{(university, course)} we get the number of students. If I get this question right, we next have to group the universitys together and divide all the summed up students by the number of courses we had for this university.
+\item[b)] The key for this problem should just be \textit{students}. After taken $\frac{1}{20}$ of all student we first count them to compare that later and then filter them by the grades (higher than 2.0). The number of student left, gives us the proportion to the original number of students.
+\item[c)] For this problem the key should be \textit{(university, course, student)}. We just need the university in the key if we want to distinguish between courses with the same name in different universitys. First we count for every key the number of students to compare that later. If we know filter the grades of this students (better than 1.7), we group them by the course and check if the number of students left is more than a half of the original number of students in that class.
+\end{itemize}
 
 \end{document}
