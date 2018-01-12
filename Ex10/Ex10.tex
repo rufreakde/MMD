@@ -122,4 +122,29 @@ t2.micro\_\_\_Linux-...                 & 2017-11-29 02:00:26                   
 \item[c)] For this problem the key should be \textit{(university, course, student)}. We just need the university in the key if we want to distinguish between courses with the same name in different universitys. First we count for every key the number of students to compare that later. If we know filter the grades of this students (better than 1.7), we group them by the course and check if the number of students left is more than a half of the original number of students in that class.
 \end{itemize}
 
+\section*{Exercise 05}
+
+\begin{itemize}
+\item[a)] This command generates the following output:
+\begin{lstlisting}
+('step', 1)
+('mankind.', 1)
+('giant', 1)
+('man,', 1)
+('a', 2)
+('for', 2)
+('A', 1)
+('small', 1)
+('leap', 1)
+\end{lstlisting}
+I think this is pretty much what I expected. Every work is counted correctly. The punctuation mark belong to a word, if it is that what you asked for? Maybe if we output with \textit{pprint()}, I want the output already sorted. But except of this there is nothing special.
+\item[b)] I don't know if this just happen because my laptop is too slow. But the output of the data is delayed for one second while the application count the words. The output varies from time to time but here is an example:
+\begin{lstlisting}
+('thx', 446792)
+('k', 446792)
+('bai', 893584)
+\end{lstlisting}
+The \textit{yes} command is pretty fast. The string was computed 446792 times. With blanks the string have 13 characters what equals 13 bytes. Since $13 * 446792 = 5808296$, the throughput is \textit{5808296 b/s} = \textit{5808.296 kB/s} = \textit{46.466368 Mb/s}.
+\end{itemize}
+
 \end{document}
