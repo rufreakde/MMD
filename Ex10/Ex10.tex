@@ -90,30 +90,6 @@ With the same formula as in Exercise 2b we receive with $n=8$ billion, $m=1$ bil
 	(1-e^{-4*1/8})^4 = 0.024
 \end{align*}
 
-\section*{Exercise 03}
-\begin{verbatim}
-	a) 
-		see function "checkCoherency" in ex10_6.py
-	b) 
-		see function "checkCompleteness" in ex10_6.py
-	c)	timeseries related to prices- ca-central
-		checkCoherency
-			number of found inconsistencies:  27
-		checkCompleteness
-			number of found inconsistencies:  37 (bei > time) 39 ( bei >= time)
-\end{verbatim}
-
-\begin{table}[]
-\centering
-\caption{Example Completeness}
-\label{my-label}
-\begin{tabular}{lll}
-\hline
-\multicolumn{1}{|l|}{price-series-name} & \multicolumn{1}{l|}{timestamp-gap-start} & \multicolumn{1}{l|}{timestamp-gap-end} \\ \hline
-t2.micro\_\_\_Linux-...                 & 2017-11-29 02:00:26                      & 2017-11-28 02:00:06                   
-\end{tabular}
-\end{table}
-
 \section*{Exercise 04}
 	
 \begin{itemize}
@@ -146,5 +122,29 @@ I think this is pretty much what I expected. Every work is counted correctly. Th
 \end{lstlisting}
 The \textit{yes} command is pretty fast. The string was computed 446792 times. With blanks the string have 13 characters what equals 13 bytes. Since $13 * 446792 = 5808296$, the throughput is \textit{5808296 b/s} = \textit{5808.296 kB/s} = \textit{46.466368 Mb/s}.
 \end{itemize}
+
+\section*{Exercise 06}
+\begin{verbatim}
+	a) 
+		see function "checkCoherency" in ex10_6.py
+	b) 
+		see function "checkCompleteness" in ex10_6.py
+	c)	timeseries related to prices- ca-central
+		checkCoherency
+			number of found inconsistencies:  27
+		checkCompleteness
+			number of found inconsistencies:  37 (bei > time) 39 ( bei >= time)
+\end{verbatim}
+
+\begin{table}[]
+\centering
+\caption{Example Completeness}
+\label{my-label}
+\begin{tabular}{lll}
+\hline
+\multicolumn{1}{|l|}{price-series-name} & \multicolumn{1}{l|}{timestamp-gap-start} & \multicolumn{1}{l|}{timestamp-gap-end} \\ \hline
+t2.micro\_\_\_Linux-...                 & 2017-11-29 02:00:26                      & 2017-11-28 02:00:06                   
+\end{tabular}
+\end{table}
 
 \end{document}
