@@ -59,19 +59,53 @@
 \maketitle
 
 \section*{Exercise 01}
-
-
+\begin{itemize}
+	\item[a)] Let $w$ be the size of the sliding window. One can then compute the arithmetic mean (remember the sum over the stream elements $p$ and $w$) over the first $w$ sized window. As the window slides for one position one can subtract the first element (which is not in the window any more) from the sum, add the new element and again divide by $w$. This will result in 3 operations per new stream element.  
+	\item[b)]
+	\begin{itemize}
+		\item[1.] If $p_{new} = p-o+n < p \Rightarrow n < o$
+		\item[2.] $p_{new} = \frac{p*w -o^2 + n^2}{w}$
+	\end{itemize}
+	\item[c)] Stream 1: 
+	\begin{align*}
+		var_{t=0} = 20 \\
+		var_{t=1} = 88
+	\end{align*}
+	Stream 2: 
+	\begin{align*}
+		var_{t=0} = 20 \\
+		var_{t=1} = 130
+	\end{align*}
+	To compute the variance over a sliding window we have to keep track of $w$, the sum of the values, and the sum of the squares of the values like explained in a). Then one can compute the variance by $\sum_{i=1}^n (x_i - \vec{x})^2 = [\sum_{i=1}^n x_i^2] - 1/n [\sum_{i=1}^n x_i]^2$
+	\item[d)] 
+	
+\end{itemize}
 \section*{Exercise 02}
 
-
 \section*{Exercise 03}
+\begin{align*}
+M =
+ \begin{bmatrix}
+1/3 & 1/2 & 0 \\
+1/3 & 0 & 1/2  \\
+1/3 & 1/2 & 1/2
+\end{bmatrix} \\
+r^{(0)} = \left( \begin{array}{c}1/3\\1/3\\1/3\end{array} \right), 
+r^{(1)} = \left( \begin{array}{c}0.2777\\0.2777\\0.444\end{array} \right), 
+r^{(2)} = \left( \begin{array}{c}0.231\\0.315\\0.454\end{array} \right), 
+r^{(3)} = \left( \begin{array}{c}0.235\\0.304\\0.461\end{array} \right), 
+r^{(4)} = \left( \begin{array}{c}0.230\\0.309\\0.461\end{array} \right), 
+\end{align*}
+
+ 
+
 
 
 \section*{Exercise 04}
 	
 
 \section*{Exercise 05}
-
+It may happen (but it is very unlikely) that in the phase when the k initialized clusters are recomputed with the points assigned to it, two cluster centers collapse. Thus fewer than k clusters can be the output.
 
 \section*{Exercise 06}
 
