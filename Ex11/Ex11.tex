@@ -128,7 +128,7 @@ Spark:
 def countVowels(word):
 	vowels = 0
 	vowels = word.count("a") + word.count("e") + word.count("i") + word.count("o") + word.count("u")
-	return (word, vowels)
+	return (vowels, word)
 	
 topElements = rdd.map(countVowels)\
 			.sortByKey(ascending=False)
