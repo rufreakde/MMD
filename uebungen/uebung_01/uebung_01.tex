@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{amsmath}
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{color}
+
+% Margins
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+\headheight=48pt
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+%\lhead{\hmwkClass} % Top left header
+%\chead{\hmwkTitle} % Top center header
+%\rhead{\hmwkAuthorName} % Top right header
+\fancyhead[L]{}
+\fancyhead[C]{\textbf{\hmwkTitle} \\ \ \\}
+\fancyhead[R]{Rudolf Chrispens \\ Marvin Klaus 3486809\\ Daniela }
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Übungsblatt 1} % Assignment title
+\newcommand{\hmwkClass}{Mining Massivs Datasets} % Course/class
+\newcommand{\hmwkClassTime}{10:30am} % Class/lecture time
+\newcommand{\hmwkAuthorName}{Rudolf Chrispens \newline Marvin Klaus 3486809\newline Daniela}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\begin{homeworkProblem}
+
+\begin{homeworkSection}{(a)}
+$1-(1-p)^n$
+\end{homeworkSection}
+
+\begin{homeworkSection}{(b)}
+$\frac{n}{1-(1-p)^n}$
+\end{homeworkSection}
+
+\begin{homeworkSection}{(c)}
+If \textit{(b)} is added $n$ times, you get the solution of \textit{(a)}
+\end{homeworkSection}
+
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+
+\begin{homeworkSection}{(a)}
+\textit{join()}: Applied on a dataset with tuples, \textit{join} pairs all the same keys with their value. Input should be a dataset with \textit{(K, V)} and \textit{(K, W)} tuples and the output is a dataset with \textit{(K, (V, W))} tuples. Example under \textit{(a)}.
+\textit{sort()}: I couldn't find a \textit{sort()} Transformation. But I describe \textit{sortByKey()} instead. This Transformation gets an dataset of \textit{(K, V)} tuples and sort them by key. You can sort them descending or ascending.
+\textit{groupBy()}: I couldn't find the \textit{groupBy()} Transformation and describe the \textit{groupByKey()} Transformation instead. This Transformation gets a dataset of tuples and groups values of the same key together. So the input tuples are \textit{(K, V)} and the output is \textit{(K, Iterable<V>)}.
+\end{homeworkSection}
+
+\begin{lstlisting}
+// Example data
+rdd1 =  sc.parallelize([("foo", 1), ("bar", 2), ("baz", 3)])
+rdd2 =  sc.parallelize([("foo", 4), ("bar", 5), ("bar", 6)])
+
+// Example join:
+rdd1.join(rdd2)
+
+// Example sortByKey:
+rdd1.sortByKey()
+
+// Example groupByKey:
+rdd1.groupByKey()
+\end{lstlisting}
+
+\begin{homeworkSection}{(b)}
+
+\end{homeworkSection}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+\begin{homeworkSection}{(a)}
+Broadcast provides a fast way to send data to each desired \textit{node} once. In this context the \textit{node} is one dataset of the data we want to map.\\ 
+Broadcast is a better solution than to just \textit{join} the data. Once its send to a machine with Broadcast it stays cached on this machine and you can access the Broadcast values on the \textit{nodes}. But be careful, don't modify the Broadcast data.\\
+A \textit{task} is the function we want to execute in the map step.
+\end{homeworkSection}
+
+\begin{homeworkSection}{(b)}
+Accumulators are used to count something up. For example (in the video) we need this to count failures in the application.\\
+If we want to build a custom accumulator we have to implement the type of the accumulator. For example a Vector class to build an accumulator of type Vector.\\
+The accumulator can only be used in the Master (Exception on workers), the reduce() function gathers data from all tasks.
+\end{homeworkSection}
+
+\begin{homeworkSection}{(c)}
+The \textit{join()}, \textit{mapValues()} and \textit{reduceByKey()} all results in partitioned RDD’s. With partitioning there is less traffic over networks what makes it much faster.\\
+In the pageRank example the links have a partitioner so that links with the same hash are on the same node. To build a custom one you have to implement a class that extends from Partitioner. The class need the variable \textit{numPartitions} and the functions \textit{getPartition()} and \textit{equals()}.
+\end{homeworkSection}
+
+\end{homeworkProblem}
+
+\end{document}
